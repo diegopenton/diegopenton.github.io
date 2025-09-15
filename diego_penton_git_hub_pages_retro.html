@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diego Penton — Portfolio</title>
+  <meta name="description" content="Diego Penton — Computer Science (AI) student at Florida Polytechnic University. Projects, experience, and contact." />
+  <meta name="color-scheme" content="light dark">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+    :root{
+      --bg:#0a0b12; --fg:#e9f0ff; --muted:#9aa3b2; --card:#111426; --accent:#58ffda; --accent-2:#8b6cff; --border:#232842;
+      --grid:#1a1f39; --glow:0 0 12px rgba(88,255,218,.35), 0 0 32px rgba(139,108,255,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
+    body::before{ /* horizon glow */
+      content:""; position:fixed; inset:-20% -20% 40% -20%; z-index:-2;
+      background:radial-gradient(ellipse at 50% 120%, rgba(139,108,255,.35) 0%, rgba(10,11,18,0) 60%),
+                 radial-gradient(ellipse at 50% 140%, rgba(88,255,218,.25) 0%, rgba(10,11,18,0) 60%);
+      filter: blur(20px);
+    }
+    .retro-bg{position:fixed; inset:0; z-index:-3; background:
+      linear-gradient(rgba(10,11,18,0) 60%, rgba(88,255,218,.12) 60%),
+      repeating-linear-gradient(0deg, transparent 0 28px, var(--grid) 29px 30px),
+      repeating-linear-gradient(90deg, transparent 0 28px, var(--grid) 29px 30px);
+      transform: perspective(600px) rotateX(60deg) translateY(20vh);
+      transform-origin: top; opacity:.9; pointer-events:none;
+    }
+    .scanlines{position:fixed; inset:0; pointer-events:none; z-index:999; mix-blend-mode:overlay; opacity:.4;
+      background:repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,.15) 3px 3px, rgba(0,0,0,0) 4px 6px);
+    }
+    a{color:var(--accent);text-decoration:none; text-shadow:0 0 6px rgba(88,255,218,.25)}
+    a:hover{opacity:.95; filter:brightness(1.05)}
+    .wrap{max-width:1000px;margin:0 auto;padding:24px}
+    header{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;padding:24px 0}
+    .title{display:flex;gap:16px;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:8px; background:conic-gradient(from 210deg at 50% 50%, var(--accent), var(--accent-2), var(--accent));
+      display:grid;place-items:center;color:#0b0b0c;font-weight:800; box-shadow: var(--glow); border:2px solid #0e1020;}
+    h1{font-family:"Press Start 2P", system-ui; letter-spacing:.5px; font-size:22px;margin:0; text-shadow:0 0 8px rgba(139,108,255,.35)}
+    .sub{color:var(--muted);margin-top:6px; font-family:"VT323", monospace; font-size:20px}
+    nav{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:linear-gradient(180deg,#151936,#0f1230);color:var(--fg);display:inline-flex;gap:8px;align-items:center; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), var(--glow)}
+    .btn.primary{border-color:#2b305a;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0b0b0c;font-weight:700}
+    .grid{display:grid;gap:16px}
+    @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
+    section{margin:18px 0}
+    .card{background:linear-gradient(180deg,#101326,#0c0f22);border:1px solid var(--border);border-radius:16px;padding:18px; box-shadow: var(--glow)}
+    h2{margin:0 0 10px 0;font-size:18px; font-family:"Press Start 2P"; text-transform:uppercase}
+    h3{margin:12px 0 6px 0;font-size:16px}
+    ul{margin:8px 0 0 18px}
+    .badge{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;margin:4px 6px 0 0;background:rgba(139,108,255,.08);font-size:13px;color:var(--muted)}
+    .two-col{columns:2;column-gap:24px}
+    @media(max-width:700px){.two-col{columns:1}}
+    footer{padding:40px 0;color:var(--muted);text-align:center}
+    .small{font-size:14px;color:var(--muted)}
+    .list-compact li{margin:6px 0}
+    .terminal{font-family:"VT323", monospace; font-size:20px; background:#0c0f22; border:1px solid var(--border); border-radius:12px; padding:12px; color:#b2f7e9; box-shadow: var(--glow)}
+    .blink{animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+  </style>
+</head>
+<body>
+  <div class="retro-bg" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <div class="avatar" aria-hidden="true">DP</div>
+        <div>
+          <h1>Diego Penton</h1>
+          <div class="sub">Computer Science — AI @ Florida Polytechnic University • Lakeland, FL</div>
+        </div>
+      </div>
+      <nav>
+        <a class="btn primary" href="#projects">Projects</a>
+        <a class="btn" href="#experience">Experience</a>
+        <a class="btn" href="#skills">Skills</a>
+        <a class="btn" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="card" id="about">
+      <h2>About</h2>
+      <p>
+        I'm a CS student focused on algorithms, data, and intelligent systems. I enjoy building modular software, analyzing complex graphs, and turning ideas into clean, shippable tools.
+      </p>
+      <div class="terminal">$ whoami — <span class="blink">█</span> diegopenton</div>
+      <p class="small">Actively seeking internships and project collaborations.</p>
+      <div style="margin-top:8px">
+        <a class="btn" href="https://github.com/diegopenton" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:pentond27@gmail.com">Email</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card" id="projects">
+        <h2>Projects</h2>
+        <article>
+          <h3>Modular Algorithmic Trading Framework <span class="small">(Fall 2025 – Present)</span></h3>
+          <ul class="list-compact">
+            <li>Python trading system with modular branch models (RSI, GARCH, ML).</li>
+            <li>Walk-forward validation + backtesting to reduce overfitting.</li>
+            <li>Risk management: Sharpe, VaR, and drawdown metrics.</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Database Final Project — Online Bookstore <span class="small">(Spring 2025)</span></h3>
+          <ul class="list-compact">
+            <li>Designed SQL schema for inventory, customers, invoices, and sales.</li>
+            <li>Implemented reports, stored procedures, and indexing for trends & efficiency.</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Airport Connectivity & Flight Route Optimization <span class="small">(Spring 2025)</span></h3>
+          <ul class="list-compact">
+            <li>Modeled airports/routes as graph nodes/edges to analyze connectivity.</li>
+            <li>Implemented shortest-path, MST, and state search to improve routing.</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Scientific Python Interactive Data Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
+          <ul class="list-compact">
+            <li>Built Python GUI for waveforms, RT60 plots, FFT, and noise cleaning.</li>
+            <li>MP3→WAV conversion; Agile workflow with GitHub & Asana.</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Etch‑a‑Sketch Image Plotter (Hackathon) <span class="small">(Spring 2024)</span></h3>
+          <ul class="list-compact">
+            <li>C++ + Arduino to transfer digital images to Etch‑a‑Sketch via motor control.</li>
+            <li>Integrated microcontroller logic for accurate reproduction.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="card" id="experience">
+        <h2>Experience</h2>
+        <h3>Admissions Ambassador — Florida Polytechnic University</h3>
+        <ul class="list-compact">
+          <li>Helped implement Eventbrite-based workflows to streamline event registration.</li>
+          <li>Coordinated with admissions team to improve student experience.</li>
+        </ul>
+        <h3>Freelance Photography & Video</h3>
+        <ul class="list-compact">
+          <li>Automotive & branding shoots; low-light portfolio curation; client delivery pipelines.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card" id="skills">
+      <h2>Skills</h2>
+      <p>
+        <span class="badge">Python</span>
+        <span class="badge">C++</span>
+        <span class="badge">SQL</span>
+        <span class="badge">Git & GitHub</span>
+        <span class="badge">Pandas</span>
+        <span class="badge">Matplotlib</span>
+        <span class="badge">Arduino</span>
+        <span class="badge">Statistics</span>
+        <span class="badge">Graph Theory</span>
+        <span class="badge">Photography</span>
+      </p>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>Contact</h2>
+      <p>Best way to reach me is email — <a href="mailto:pentond27@gmail.com">pentond27@gmail.com</a> — or message me on <a href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener">LinkedIn</a>.</p>
+    </section>
+
+    <footer>
+      <div class="small">© <span id="y"></span> Diego Penton • Built with HTML/CSS • Retro CRT vibes</div>
+    </footer>
+  </div>
+  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
