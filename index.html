@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Diego Penton — Portfolio</title>
@@ -8,9 +9,9 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
     :root{
-      --bg:#2d1a07; --fg:#fff4e6; --muted:#f0c987; --card:#3d220a;
+      --bg:#5a3713; --fg:#fff4e6; --muted:#d89c35; --card:#6f3d11;
       --accent:#ffae42; --accent-2:#ff6b35; --border:#6b3412;
-      --grid:#6b3412; --glow:0 0 12px rgba(255,174,66,.45), 0 0 32px rgba(255,107,53,.35);
+      --grid:#6b3412; --glow:0 0 12px rgba(212, 141, 49, 0.477), 0 0 32px rgba(251, 94, 37, 0.35);
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
@@ -31,7 +32,7 @@
     .wrap{max-width:1000px;margin:0 auto;padding:24px}
     header{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;padding:24px 0}
     .title{display:flex;gap:16px;align-items:center}
-    .avatar-img{width:72px;height:72px;border-radius:12px;object-fit:cover;box-shadow:var(--glow);border:2px solid var(--border)}
+    .avatar-img{width:450px;height:360px;border-radius:12px;object-fit:cover;box-shadow:var(--glow);border:2px solid var(--border)}
     h1{font-family:"Press Start 2P", system-ui; letter-spacing:.5px; font-size:22px;margin:0; text-shadow:0 0 8px rgba(255,174,66,.45)}
     .sub{color:var(--muted);margin-top:6px; font-family:"VT323", monospace; font-size:20px}
     nav{display:flex;gap:12px;flex-wrap:wrap}
@@ -53,6 +54,20 @@
     .terminal{font-family:"VT323", monospace; font-size:20px; background:#3d220a; border:1px solid var(--border); border-radius:12px; padding:12px; color:#ffefdb; box-shadow: var(--glow)}
     .blink{animation:blink 1s steps(1) infinite}
     @keyframes blink{50%{opacity:0}}
+    .skill-icon {
+      width:16px; height:16px;
+      margin-right:6px;
+      vertical-align:middle;
+    }
+    .skill-icon.fa { 
+      font-size:16px;
+      width:auto; height:auto;
+    }
+    .skill-icon{
+      width:16px; height:16px;
+      vertical-align:-3px;     /* lines up with text nicely */
+      margin-right:6px;
+    }
   </style>
 </head>
 <body>
@@ -80,7 +95,7 @@
       <p>
         I'm a CS student focused on algorithms, data, and intelligent systems. I enjoy building modular software, analyzing complex graphs, and turning ideas into clean, shippable tools.
       </p>
-      <div class="terminal">$ whoami — <span class="blink">█</span> diegopenton</div>
+      <div class="terminal">$ whoami — <span class="blink">█</span>Diego Penton</div>
       <p class="small">Actively seeking internships and project collaborations.</p>
       <div style="margin-top:8px">
         <a class="btn" href="https://github.com/diegopenton" target="_blank" rel="noopener">GitHub</a>
@@ -154,25 +169,53 @@
 </section>
 
 
-    <section class="card" id="skills">
-      <h2>Skills</h2>
-      <p>
-        <span class="badge">Python</span>
-        <span class="badge">C++</span>
-        <span class="badge">C</span>
-        <span class="badge">html</span>
-        <span class="badge">SQL</span>
-        <span class="badge">Git & GitHub</span>
-        <span class="badge">Graph Theory</span>
-        <span class="badge">Matplotlib</span>
-        <span class="badge">Yfinance</span>
-        <span class="badge">Numpy</span>
-      </p>
-    </section>
+<section class="card" id="skills">
+  <h2>Skills</h2>
+  <p>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"> C++
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"> C
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"> HTML
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL/MySQL"> SQL
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"> Git & GitHub
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"> NumPy
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib"> Matplotlib
+    </span>
+    <span class="badge">
+      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"> VS Code
+    </span>
+    <span class="badge">
+      <i class="fas fa-project-diagram skill-icon"></i> Graph Theory
+    </span>
+    <span class="badge">
+      <i class="fas fa-chart-line skill-icon"></i> yfinance
+    </span>
+    <span class="badge">
+      <i class="fas fa-database skill-icon"></i> Data Structures
+    </span>
+
+  </p>
+</section>
 
     <section class="card" id="contact">
       <h2>Contact</h2>
       <p>Email — <a href="mailto:pentond27@gmail.com">pentond27@gmail.com</a></p>
+      <p>Phone — <a >+1 (786)-759-4671</a></p>
     </section>
 
     <footer>
