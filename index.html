@@ -1,227 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Diego Penton — Portfolio</title>
-  <meta name="description" content="Diego Penton — Computer Science (AI) student at Florida Polytechnic University. Projects, experience, and contact." />
+  <meta name="description" content="Diego Penton — Computer Science (AI). Projects, experience, skills, and contact." />
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+    /* ===== Design tokens: modern, clean, colorful ===== */
     :root{
-      --bg:#5a3713; --fg:#fff4e6; --muted:#d89c35; --card:#6f3d11;
-      --accent:#ffae42; --accent-2:#ff6b35; --border:#6b3412;
-      --grid:#6b3412; --glow:0 0 12px rgba(212, 141, 49, 0.477), 0 0 32px rgba(251, 94, 37, 0.35);
+      --bg:#0b0f16; --text:#e7ecff; --muted:#a6b0c3; --card:#0f1420; --border:#1b2333;
+      --accent:#7c3aed; /* purple */
+      --accent-2:#06b6d4; /* cyan */
+      --accent-3:#f59e0b; /* amber */
+      --radius:14px;
+      --shadow:0 1px 2px rgba(0,0,0,.25), 0 12px 40px rgba(2,8,23,.45);
     }
+    @media(prefers-color-scheme: light){
+      :root{ --bg:#ffffff; --text:#0b1220; --muted:#5b6475; --card:#ffffff; --border:#e6e8ee; --shadow:0 1px 2px rgba(16,24,40,.06), 0 8px 28px rgba(16,24,40,.08);} }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
-    body::before{content:""; position:fixed; inset:-20% -20% 40% -20%; z-index:-2;
-      background:radial-gradient(ellipse at 50% 120%, rgba(255,174,66,.35) 0%, rgba(45,26,7,0) 60%),
-                 radial-gradient(ellipse at 50% 140%, rgba(255,107,53,.25) 0%, rgba(45,26,7,0) 60%);
-      filter: blur(20px);}
-    .retro-bg{position:fixed; inset:0; z-index:-3; background:
-      linear-gradient(rgba(45,26,7,0) 60%, rgba(255,174,66,.12) 60%),
-      repeating-linear-gradient(0deg, transparent 0 28px, var(--grid) 29px 30px),
-      repeating-linear-gradient(90deg, transparent 0 28px, var(--grid) 29px 30px);
-      transform: perspective(600px) rotateX(60deg) translateY(20vh);
-      transform-origin: top; opacity:.9; pointer-events:none;}
-    .scanlines{position:fixed; inset:0; pointer-events:none; z-index:999; mix-blend-mode:overlay; opacity:.25;
-      background:repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 2px, rgba(0,0,0,.15) 3px 3px, rgba(0,0,0,0) 4px 6px);}
-    a{color:var(--accent);text-decoration:none; text-shadow:0 0 6px rgba(255,174,66,.45)}
-    a:hover{opacity:.95; filter:brightness(1.1)}
-    .wrap{max-width:1000px;margin:0 auto;padding:24px}
-    header{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;padding:24px 0}
-    .title{display:flex;gap:16px;align-items:center}
-    .avatar-img{width:450px;height:360px;border-radius:12px;object-fit:cover;box-shadow:var(--glow);border:2px solid var(--border)}
-    h1{font-family:"Press Start 2P", system-ui; letter-spacing:.5px; font-size:22px;margin:0; text-shadow:0 0 8px rgba(255,174,66,.45)}
-    .sub{color:var(--muted);margin-top:6px; font-family:"VT323", monospace; font-size:20px}
-    nav{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:linear-gradient(180deg,#6b3412,#3d220a);color:var(--fg);display:inline-flex;gap:8px;align-items:center; box-shadow: inset 0 1px 0 rgba(255,255,255,.05), var(--glow)}
-    .btn.primary{border-color:#6b3412;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#2d1a07;font-weight:700}
-    .grid{display:grid;gap:16px}
-    @media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
-    section{margin:18px 0}
-    .card{background:linear-gradient(180deg,#3d220a,#2d1a07);border:1px solid var(--border);border-radius:16px;padding:18px; box-shadow: var(--glow)}
-    h2{margin:0 0 10px 0;font-size:18px; font-family:"Press Start 2P"; text-transform:uppercase}
-    h3{margin:12px 0 6px 0;font-size:16px}
-    ul{margin:8px 0 0 18px}
-    .badge{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;margin:4px 6px 0 0;background:rgba(255,174,66,.1);font-size:13px;color:var(--muted)}
-    .two-col{columns:2;column-gap:24px}
-    @media(max-width:700px){.two-col{columns:1}}
-    footer{padding:40px 0;color:var(--muted);text-align:center}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 700px at 20% -10%, rgba(124,58,237,.20), transparent 60%), radial-gradient(1000px 600px at 110% 10%, rgba(6,182,212,.18), transparent 55%), var(--bg);color:var(--text);font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Arial}
+    img{max-width:100%;display:block}
+    a{color:var(--accent)}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    .btn{display:inline-flex;gap:10px;align-items:center;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent}
+    .btn.ghost{background:transparent}
+    h1{font-size:36px;letter-spacing:.2px;margin:0}
+    h2{font-size:24px;margin:0 0 12px 0}
+    h3{font-size:18px;margin:12px 0 6px 0}
+    .sub{color:var(--muted)}
+
+    /* ===== Navbar ===== */
+    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(11,15,22,.85), rgba(11,15,22,.65));backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--border)}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:10px 28px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .brand-logo{width:36px;height:36px;border-radius:10px;background:conic-gradient(from 210deg, var(--accent), var(--accent-2), var(--accent));border:1px solid var(--border)}
+    .brand h1{font-size:18px}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    .links a{padding:8px 12px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
+    .links a:hover{border-color:var(--border);background:rgba(255,255,255,.03)}
+
+    /* ===== Hero ===== */
+    .hero{display:grid;gap:16px;margin:24px 0 18px}
+    .gradient-text{background:linear-gradient(135deg,var(--accent),var(--accent-2) 50%, var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+    /* ===== Sections ===== */
+    section{margin:22px 0}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid.two{grid-template-columns:1.1fr .9fr}}
+
+    /* ===== Project grid ===== */
+    .proj-grid{display:grid;gap:16px}
+    @media(min-width:800px){.proj-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    .proj{overflow:hidden}
+    .proj h3{display:flex;align-items:center;justify-content:space-between}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .tag{font-size:12px;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:var(--muted)}
+
+    /* ===== Timeline ===== */
+    .timeline{position:relative;padding-left:20px}
+    .timeline::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),var(--accent-2))}
+    .titem{position:relative;margin:14px 0}
+    .titem::before{content:"";position:absolute;left:-2px;top:.4rem;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
+
+    /* ===== Footer ===== */
+    footer{text-align:center;color:var(--muted);padding:36px 0}
     .small{font-size:14px;color:var(--muted)}
-    .list-compact li{margin:6px 0}
-    .terminal{font-family:"VT323", monospace; font-size:20px; background:#3d220a; border:1px solid var(--border); border-radius:12px; padding:12px; color:#ffefdb; box-shadow: var(--glow)}
-    .blink{animation:blink 1s steps(1) infinite}
-    @keyframes blink{50%{opacity:0}}
+
+    /* ——— (Old skills rules below had selector typos / large sizes; keep but override safely) ——— */
+    /* original user lines kept but neutralized via later !important overrides */
+    skills-list{ display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+    skill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:25px 25px; border:4px solid var(--border);
+      border-radius:999px; background:var(--card); color:var(--text);
+      box-shadow:var(--shadow); font-size:14px;
+    }
     .skill-icon {
-      width:16px; height:16px;
-      margin-right:6px;
-      vertical-align:middle;
+      width: 50px; height: 50px; margin-right: 6px; vertical-align: middle;
+      flex-shrink: 0; display: inline-block; object-fit: contain;
     }
-    .skill-icon.fa { 
-      font-size:16px;
-      width:auto; height:auto;
+    /* Font Awesome icons (if used) align like SVGs */
+    skill .fa{font-size:18px; line-height:1; width:18px; height:18px; display:inline-block;}
+
+    /* ===== Skills (corrected, with safe overrides) ===== */
+    .skills-list{ display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
+    .skill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 14px; border:1px solid var(--border);
+      border-radius:999px; background:var(--card); color:var(--text);
+      box-shadow:var(--shadow); font-size:14px; line-height:1.4; white-space:nowrap;
     }
-    .skill-icon{
-      width:16px; height:16px;
-      vertical-align:-3px;     /* lines up with text nicely */
-      margin-right:6px;
+    .skill-icon{ width:18px !important; height:18px !important; object-fit:contain; flex-shrink:0; }
+
+    /* Teleprompter skills marquee */
+    .skills-marquee {
+      overflow: hidden; position: relative; padding: 8px 0;
+      mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+    .skills-marquee .track {
+      display: inline-flex; gap: 12px; will-change: transform;
+      animation: marquee var(--dur, 20s) linear infinite;
+    }
+    .skills-marquee:hover .track { animation-play-state: paused; } /* pause on hover */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .skills-marquee[data-dir="right"] .track { animation-direction: reverse; }
+
+    @media (prefers-reduced-motion: reduce){
+      .skills-marquee .track { animation: none; }
+      .skills-marquee { mask-image: none; -webkit-mask-image: none; overflow: visible; }
+    }
+    /* ——— Project carousel ——— */
+    .proj-carousel { position: relative; }
+    .proj-carousel .proj { display: none; }
+    .proj-carousel .proj.active { display: block; }
+
+    .proj-controls {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; margin-top:12px;
+    }
+    .proj-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:40px; height:40px; border-radius:10px;
+      border:1px solid var(--border); background:var(--card); color:var(--text);
+      box-shadow:var(--shadow); cursor:pointer;
+    }
+    .proj-btn:hover { border-color: var(--accent); }
+    .proj-counter { color: var(--muted); font-size:14px; }
+  /* Project heading style */
+    .proj-heading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  <div class="retro-bg" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="wrap">
-    <header>
-      <div class="title">
-        <img src="assets/diego-avatar.png" alt="Diego Penton portrait" class="avatar-img" />
-        <div>
-          <h1>Diego Penton</h1>
-          <div class="sub">Computer Science — AI @ Florida Polytechnic University • Lakeland, FL</div>
-        </div>
+  <!-- NAVBAR -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <h1>Diego Penton</h1>
       </div>
-      <nav>
-        <a class="btn primary" href="#projects">Projects</a>
-        <a class="btn" href="#experience">Experience</a>
-        <a class="btn" href="#skills">Skills</a>
-        <a class="btn" href="#contact">Contact</a>
+      <nav class="links">
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#resume">Résumé</a>
+        <a href="#contact">Contact</a>
       </nav>
-    </header>
+    </div>
+  </div>
 
-    <section class="card" id="about">
-      <h2>About</h2>
-      <p>
-        I'm a CS student focused on algorithms, data, and intelligent systems. I enjoy building modular software, analyzing complex graphs, and turning ideas into clean, shippable tools.
-      </p>
-      <div class="terminal">$ whoami — <span class="blink">█</span>Diego Penton</div>
-      <p class="small">Actively seeking internships and project collaborations.</p>
-      <div style="margin-top:8px">
-        <a class="btn" href="https://github.com/diegopenton" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="mailto:pentond27@gmail.com">Email</a>
+  <div class="wrap">
+    <!-- HERO / HOME -->
+    <section id="home" class="hero card">
+      <h1 class="gradient-text">Software + Systems, with clarity.</h1>
+      <p class="sub">CS (AI) @ Florida Poly. I build practical tools with Python/C++, data modeling, and clean UX. Open to internships and collabs.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn primary" href="#projects"><i class="fa-solid fa-rocket"></i> View Projects</a>
+        <a class="btn" href="mailto:pentond27@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+        <a class="btn" href="https://github.com/diegopenton" target="_blank" rel="noopener"><i class="devicon-github-original"></i> GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
       </div>
     </section>
 
-    <div class="grid">
-      <section class="card" id="projects">
-        <h2>Projects</h2>
-        <article>
-          <h3>Modular Algorithmic Trading Framework <span class="small">(Fall 2025 – Present)</span></h3>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="card">
+        <h2>About Me</h2>
+        <p class="sub">My name is Diego Penton, and I am pursuing a Bachelor of Science in Computer Science with a concentration in Artificial Intelligence at Florida Polytechnic University. My academic journey has allowed me to develop strong skills in C, C++, SQL, and Python, which I’ve applied to projects in data modeling, algorithms, and AI-driven systems.
+        </p>
+
+        <p class="sub">Currently, I’m developing a Modular Algorithmic Trading Framework, a project that explores trading strategies through modular “branch” models like RSI, GARCH, and machine learning. My goal is to improve backtesting reliability, reduce overfitting, and strengthen risk management metrics such as the Sharpe ratio and Value-at-Risk. This work is inspired by both my studies and my personal interest in the stock market, where I see a unique opportunity to merge computer science and finance.
+        </p>
+
+        <p class="sub">Looking ahead, I’m passionate about pursuing a career in quantitative finance and algorithmic trading, with the long-term goal of earning a master’s degree in machine learning and contributing to research in neural networks and advanced financial modeling. Beyond my coursework, I’ve had the opportunity to collaborate on diverse projects — from database systems to graph-based optimization — which continue to fuel my drive to solve complex, real-world problems at the intersection of AI and finance
+        </p>
+      </div>
+    </section>
+    
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="card">
+        <div class="proj-heading">Projects</div> <!-- Heading added -->
+      
+        <div class="proj-carousel" id="projCarousel">
+          <!-- PANELS: keep all your existing articles -->
+          <article class="card proj">
+            <h3>Modular Algorithmic Trading Framework <span class="small">(Fall 2025 – Present)</span></h3>
+            <p class="sub">Python trading system with modular “branch” models (RSI, GARCH, ML) and walk-forward validation.</p>
+            <ul class="list-compact">
+              <li>Implemented walk-forward validation and backtesting to reduce overfitting.</li>
+              <li>Designed risk management with Sharpe ratio, VaR, and drawdown metrics.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Backtesting</span><span class="tag">GARCH</span></div>
+          </article>
+        
+          <article class="card proj">
+            <h3>Database Final Project — Online Bookstore <span class="small">(Spring 2025)</span></h3>
+            <p class="sub">SQL database modeling operations for an online bookstore: inventory, customers, invoicing, and sales.</p>
+            <ul class="list-compact">
+              <li>Designed tables, relationships, and queries for products, customers, and invoices.</li>
+              <li>Built reports, stored procedures, and indexing to track trends and improve efficiency.</li>
+            </ul>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">Schema</span><span class="tag">Indexes</span></div>
+          </article>
+        
+          <article class="card proj">
+            <h3>Graph-Based Airport Connectivity & Flight Route Optimization <span class="small">(Spring 2025)</span></h3>
+            <p class="sub">Modeled airports/routes as graph nodes/edges to analyze connectivity and optimize routes.</p>
+            <ul class="list-compact">
+              <li>Implemented shortest-path, MST, and state-search algorithms.</li>
+              <li>Reduced redundant routes and highlighted major hubs for efficiency.</li>
+            </ul>
+            <div class="tags"><span class="tag">Graphs</span><span class="tag">Algorithms</span></div>
+          </article>
+        
+          <article class="card proj">
+            <h3>Scientific Python Interactive Data Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
+            <p class="sub">Python GUI to analyze/visualize acoustic data (waveforms, RT60, FFT) with cleaning tools.</p>
+            <ul class="list-compact">
+              <li>Implemented FFT, MP3→WAV conversion, and noise cleaning for signal processing.</li>
+              <li>Collaborated with a 3-person Agile team using GitHub and Asana.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Signal Proc</span></div>
+          </article>
+        
+          <article class="card proj">
+            <h3>Etch-a-Sketch Image Plotter (Hackathon) <span class="small">(Spring 2024)</span></h3>
+            <p class="sub">C++/Arduino mechanism to transfer digital images to an Etch-a-Sketch via precise motor control.</p>
+            <ul class="list-compact">
+              <li>Programmed accurate dual-motor commands to reproduce images.</li>
+              <li>Integrated hardware and microcontroller logic for automated drawing.</li>
+            </ul>
+            <div class="tags"><span class="tag">C++</span><span class="tag">Arduino</span></div>
+          </article>
+        
+          <!-- CONTROLS -->
+          <div class="proj-controls" aria-label="Project navigation">
+            <button class="proj-btn" id="projPrev" aria-label="Previous project">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="proj-counter" id="projCounter">1 / 5</div>
+            <button class="proj-btn" id="projNext" aria-label="Next project">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- SKILLS (teleprompter) -->
+    <section id="skills">
+      <div class="card">
+        <h2>Skills</h2>
+        <div class="skills-marquee" data-marquee data-speed="120">
+          <div class="track">
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"> C++</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"> C</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL/MySQL"> SQL / MySQL</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"> Git & GitHub</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"> VS Code</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"> NumPy</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib"> Matplotlib</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"> C++</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"> C</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"> HTML</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL/MySQL"> SQL / MySQL</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"> Git & GitHub</span>
+            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"> VS Code</span>
+            <span class="skill"><i class="fa-solid fa-chart-line skill-icon"></i> yfinance</span>
+            <span class="skill"><i class="fa-solid fa-project-diagram skill-icon"></i> Graph Theory</span>
+            <span class="skill"><i class="fa-solid fa-database skill-icon"></i> Data Structures</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="card">
+        <h2>Experience</h2>
+        <div class="timeline">
+        <div class="titem">
+          <h3>Admissions Ambassador — Florida Polytechnic University <span class="small">(Aug 2024 – Present)</span></h3>
           <ul class="list-compact">
-            <li>Python trading system with modular branch models (RSI, GARCH, ML).</li>
-            <li>Walk-forward validation + backtesting to reduce overfitting.</li>
-            <li>Risk management: Sharpe, VaR, and drawdown metrics.</li>
+            <li>Represented the university to prospective students and families during tours and info sessions.</li>
+            <li>Assisted 500+ prospective students with tailored resources; streamlined admissions with Eventbrite workflows.</li>
           </ul>
-        </article>
-        <article>
-          <h3>Database Final Project — Online Bookstore <span class="small">(Spring 2025)</span></h3>
+        </div>
+      
+        <div class="titem">
+          <h3>Microscopy Department Intern — Zurich University, Zürich, Switzerland <span class="small">(Jul 2022 – Aug 2022)</span></h3>
           <ul class="list-compact">
-            <li>Designed SQL schema for inventory, customers, invoices, and sales.</li>
-            <li>Implemented reports, stored procedures, and indexing for trends & efficiency.</li>
+            <li>Standardized guides for TEM, SEM, Cryo-EM, and image-analysis tools.</li>
+            <li>Updated documentation for microscopy software and workflows.</li>
+            <li>Organized the department’s training and documentation database.</li>
           </ul>
-        </article>
-        <article>
-          <h3>Airport Connectivity & Flight Route Optimization <span class="small">(Spring 2025)</span></h3>
+        </div>
+      
+        <div class="titem">
+          <h3>Research Intern — Fairchild Botanical Garden, Miami, FL <span class="small">(Jun 2022 – Jul 2022)</span></h3>
           <ul class="list-compact">
-            <li>Modeled airports/routes as graph nodes/edges to analyze connectivity.</li>
-            <li>Implemented shortest-path, MST, and state search to improve routing.</li>
+            <li>Worked on 4 experiments with plant-growth simulations for NASA’s Kennedy Space Center and Fairchild Botanical Garden.</li>
+            <li>Visited Kennedy Space Center; observed behind-the-scenes plant-biology research tied to Growing Beyond Earth.</li>
+            <li>Presented findings at a symposium hosted by Fairchild, live-streamed to NASA collaborators.</li>
           </ul>
-        </article>
-        <article>
-          <h3>Scientific Python Interactive Data Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
-          <ul class="list-compact">
-            <li>Built Python GUI for waveforms, RT60 plots, FFT, and noise cleaning.</li>
-            <li>MP3→WAV conversion; Agile workflow with GitHub & Asana.</li>
-          </ul>
-        </article>
-        <article>
-          <h3>Etch‑a‑Sketch Image Plotter (Hackathon) <span class="small">(Spring 2024)</span></h3>
-          <ul class="list-compact">
-            <li>C++ + Arduino to transfer digital images to Etch‑a‑Sketch via motor control.</li>
-            <li>Integrated microcontroller logic for accurate reproduction.</li>
-          </ul>
-        </article>
-      </section>
+        </div>
+      </div>
 
-      <section class="card" id="experience">
-  <h2>Experience</h2>
+      </div>
+    </section>
 
-  <h3>Admissions Ambassador — Florida Polytechnic University <span class="small">(Aug 2024 – Present)</span></h3>
-  <ul class="list-compact">
-    <li>Represent the university to prospective students and families during tours and info sessions.</li>
-    <li>Assisted 500+ prospective students with tailored resources; streamlined registration with Eventbrite workflows.</li>
-  </ul>
+    <!-- RESUME -->
+    <section id="resume">
+      <div class="card">
+        <h2>Résumé</h2>
+        <p class="sub">Upload <code>resume.pdf</code> to your repo root and this button will open it.</p>
+        <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener"><i class="fa-regular fa-file-pdf"></i> Open résumé (PDF)</a>
+      </div>
+    </section>
 
-  <h3>Microscopy Department Intern — Zurich University, Zürich, Switzerland <span class="small">(Jul 2022 – Aug 2022)</span></h3>
-  <ul class="list-compact">
-    <li>Standardized guides for TEM, SEM, Cryo-EM, and image-analysis tools.</li>
-    <li>Updated documentation for microscopy software and workflows.</li>
-    <li>Organized the lab’s training and documentation database.</li>
-  </ul>
-
-  <h3>Research Intern — Fairchild Botanical Garden, Miami, FL <span class="small">(Jun 2022 – Jul 2022)</span></h3>
-  <ul class="list-compact">
-    <li>Supported experiments on plant-growth simulation and environmental controls (NASA Growing Beyond Earth).</li>
-    <li>Visited Kennedy Space Center; observed behind-the-scenes plant-biology research for space habitats.</li>
-  </ul>
-</section>
-
-
-<section class="card" id="skills">
-  <h2>Skills</h2>
-  <p>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"> C++
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"> C
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5"> HTML
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL/MySQL"> SQL
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git"> Git & GitHub
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy"> NumPy
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib"> Matplotlib
-    </span>
-    <span class="badge">
-      <img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code"> VS Code
-    </span>
-    <span class="badge">
-      <i class="fas fa-project-diagram skill-icon"></i> Graph Theory
-    </span>
-    <span class="badge">
-      <i class="fas fa-chart-line skill-icon"></i> yfinance
-    </span>
-    <span class="badge">
-      <i class="fas fa-database skill-icon"></i> Data Structures
-    </span>
-
-  </p>
-</section>
-
-    <section class="card" id="contact">
-      <h2>Contact</h2>
-      <p>Email — <a href="mailto:pentond27@gmail.com">pentond27@gmail.com</a></p>
-      <p>Phone — <a >+1 (786)-759-4671</a></p>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="card">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:pentond27@gmail.com">pentond27@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/diegopenton" target="_blank" rel="noopener">github.com/diegopenton</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener">linkedin.com/in/diegopenton</a></p>
+      </div>
     </section>
 
     <footer>
-      <div class="small">© <span id="y"></span> Diego Penton • Built with HTML/CSS • Golden Hour Neon Vibes</div>
+      <div class="small">© <span id="y"></span> Diego Penton • Portfolio</div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('.links a').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href')||'';
+        if(href.startsWith('#')){ e.preventDefault(); document.querySelector(href)?.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // Teleprompter marquee init (duplicate content for seamless loop & set duration by width/speed)
+    document.querySelectorAll('[data-marquee]').forEach(mq => {
+      const track = mq.querySelector('.track');
+      const speed = Number(mq.dataset.speed || 120); // px/sec
+      if (!track) return;
+
+      // duplicate once
+      track.innerHTML = track.innerHTML + track.innerHTML;
+
+      requestAnimationFrame(() => {
+        const contentWidth = track.scrollWidth / 2; // original width
+        const dur = contentWidth / speed;           // seconds
+        track.style.setProperty('--dur', dur + 's');
+      });
+    });
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+    (function(){
+      const root = document.getElementById('projCarousel');
+      if(!root) return;
+      const items = Array.from(root.querySelectorAll('.proj'));
+      const prev = root.querySelector('#projPrev');
+      const next = root.querySelector('#projNext');
+      const counter = root.querySelector('#projCounter');
+      let i = 0;
+
+      function show(idx){
+        items.forEach((el, j)=> el.classList.toggle('active', j === idx));
+        if(counter) counter.textContent = (idx+1) + ' / ' + items.length;
+      }
+      function wrap(n, len){ return (n + len) % len; }
+
+      show(i);
+      prev?.addEventListener('click', ()=>{ i = wrap(i-1, items.length); show(i); });
+      next?.addEventListener('click', ()=>{ i = wrap(i+1, items.length); show(i); });
+    })();
+  </script>
 </body>
 </html>
