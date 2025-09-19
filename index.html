@@ -12,9 +12,9 @@
   <style>
     /* ===== Design tokens: modern, clean, colorful ===== */
     :root{
-      --bg:#0b0f16; --text:#e7ecff; --muted:#a6b0c3; --card:#0f1420; --border:#1b2333;
-      --accent:#7c3aed; /* purple */
-      --accent-2:#06b6d4; /* cyan */
+      --bg:#2f6bd3; --text:#e7ecff; --muted:#a6b0c3; --card:#0f1420; --border:#1b2333;
+      --accent:#744bba; /* purple */
+      --accent-2:#00d9ff; /* cyan */
       --accent-3:#f59e0b; /* amber */
       --radius:14px;
       --shadow:0 1px 2px rgba(0,0,0,.25), 0 12px 40px rgba(2,8,23,.45);
@@ -200,57 +200,83 @@
     <!-- PROJECTS -->
     <section id="projects">
       <div class="card">
-        <div class="proj-heading">Projects</div> <!-- Heading added -->
+        <div class="proj-heading">Projects</div>
       
         <div class="proj-carousel" id="projCarousel">
-          <!-- PANELS: keep all your existing articles -->
+          <!-- PANELS -->
           <article class="card proj">
             <h3>Modular Algorithmic Trading Framework <span class="small">(Fall 2025 – Present)</span></h3>
-            <p class="sub">Python trading system with modular “branch” models (RSI, GARCH, ML) and walk-forward validation.</p>
-            <ul class="list-compact">
-              <li>Implemented walk-forward validation and backtesting to reduce overfitting.</li>
-              <li>Designed risk management with Sharpe ratio, VaR, and drawdown metrics.</li>
-            </ul>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Backtesting</span><span class="tag">GARCH</span></div>
+            <p class="sub">
+              This project is a modular algorithmic trading framework built in Python that I am actively developing. 
+              The system is designed around a “tree-trunk and branches” architecture where each branch represents 
+              a different predictive model, such as RSI-based decision trees, Bollinger band mean-reversion, GARCH 
+              volatility forecasting, and LSTM/GRU sequence models. These branches generate signals and confidence 
+              scores that are routed through a trunk ensemble and policy layer, which determines the final trading 
+              action and position sizing. I structure the framework with unit testing, backtesting, and walk-forward 
+              validation to make sure every component is evaluated out-of-sample, reducing the risk of overfitting. 
+              The project is not just about writing models—it is about building a full research pipeline that can be 
+              extended with new strategies and easily tested across different assets and time periods.
+            </p>
+            <p class="sub">
+              At the same time, I focus on the practical aspects of algorithmic trading research. The framework 
+              includes a backtesting engine that calculates key metrics like Sharpe ratio, maximum drawdown, and 
+              hit rate, giving me a way to judge strategies on both return and risk. Each branch is intentionally 
+              lightweight and interpretable so that it can be debugged quickly, but when combined they create an 
+              ensemble that adapts across market conditions. Beyond just producing trades, I also incorporate risk 
+              management through volatility-aware position sizing and regime filters that control when strategies 
+              should be active. The project continues to grow as I add new branches, refine ensemble weighting, 
+              and experiment with deep learning models, making it a hands-on exploration of how modular design 
+              principles can be applied to quantitative finance.
+            </p>
           </article>
-        
+
+          <article class="card proj">
+            <section id="database-project">
+              <h2>Database Systems Project – The Book Nook</h2>
+              <p>
+                For my <strong>Database Systems course project</strong>, I designed and implemented a relational database
+                for <em>The Book Nook</em>, a fictional bookstore specializing in science fiction and fantasy.
+                The store needed a system to manage its growing catalog of books and merchandise, track customer purchase histories,
+                and generate accurate invoices. I created an entity–relationship model with subtypes for products,
+                separating physical books, eBooks, and merchandise. From there, I built the schema, wrote SQL scripts
+                for table creation, and implemented stored procedures, queries, and views to automate invoicing,
+                update inventory in real time, and analyze sales data.
+              </p>
+              <p>
+                Working independently, I normalized the design to the third normal form (3NF) to ensure consistency and efficiency.
+                I tested the database using realistic dummy data and evaluated its performance with indexing to speed up queries.
+                The final solution provided a strong foundation for handling inventory, customer data, and transactions
+                across both in-store and online sales. This project not only strengthened my SQL and database modeling skills
+                but also gave me practical experience in solving real-world business challenges with structured data systems.
+              </p>
+            </section>
+          </article>
+
           <article class="card proj">
             <h3>Database Final Project — Online Bookstore <span class="small">(Spring 2025)</span></h3>
-            <p class="sub">SQL database modeling operations for an online bookstore: inventory, customers, invoicing, and sales.</p>
-            <ul class="list-compact">
-              <li>Designed tables, relationships, and queries for products, customers, and invoices.</li>
-              <li>Built reports, stored procedures, and indexing to track trends and improve efficiency.</li>
-            </ul>
+            <p class="sub">A comprehensive SQL database modeling the operations of an online bookstore. Included inventory tracking, customer management, invoicing, and sales analysis. Reports, stored procedures, and indexing were added to improve performance and provide actionable insights.</p>
+            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
             <div class="tags"><span class="tag">SQL</span><span class="tag">Schema</span><span class="tag">Indexes</span></div>
           </article>
         
           <article class="card proj">
             <h3>Graph-Based Airport Connectivity & Flight Route Optimization <span class="small">(Spring 2025)</span></h3>
-            <p class="sub">Modeled airports/routes as graph nodes/edges to analyze connectivity and optimize routes.</p>
-            <ul class="list-compact">
-              <li>Implemented shortest-path, MST, and state-search algorithms.</li>
-              <li>Reduced redundant routes and highlighted major hubs for efficiency.</li>
-            </ul>
+            <p class="sub">This project modeled airports and flight routes as graphs to analyze connectivity and improve routing efficiency. By applying shortest-path, MST, and state-search algorithms, the system identified redundancies, highlighted hub airports, and optimized network design.</p>
+            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
             <div class="tags"><span class="tag">Graphs</span><span class="tag">Algorithms</span></div>
           </article>
         
           <article class="card proj">
             <h3>Scientific Python Interactive Data Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
-            <p class="sub">Python GUI to analyze/visualize acoustic data (waveforms, RT60, FFT) with cleaning tools.</p>
-            <ul class="list-compact">
-              <li>Implemented FFT, MP3→WAV conversion, and noise cleaning for signal processing.</li>
-              <li>Collaborated with a 3-person Agile team using GitHub and Asana.</li>
-            </ul>
+            <p class="sub">Developed a Python GUI for analyzing and visualizing acoustic data. Features included waveform display, RT60 reverberation analysis, FFT tools, and noise-cleaning methods. Collaboration was structured with Agile methodology using GitHub and Asana.</p>
+            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
             <div class="tags"><span class="tag">Python</span><span class="tag">Signal Proc</span></div>
           </article>
         
           <article class="card proj">
             <h3>Etch-a-Sketch Image Plotter (Hackathon) <span class="small">(Spring 2024)</span></h3>
-            <p class="sub">C++/Arduino mechanism to transfer digital images to an Etch-a-Sketch via precise motor control.</p>
-            <ul class="list-compact">
-              <li>Programmed accurate dual-motor commands to reproduce images.</li>
-              <li>Integrated hardware and microcontroller logic for automated drawing.</li>
-            </ul>
+            <p class="sub">A C++/Arduino system that converted digital images into precise motor commands for an Etch-a-Sketch. The project integrated microcontroller programming with mechanical control, enabling automated sketching of digital graphics.</p>
+            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
             <div class="tags"><span class="tag">C++</span><span class="tag">Arduino</span></div>
           </article>
         
@@ -268,12 +294,11 @@
       </div>
     </section>
 
-
     <!-- SKILLS (teleprompter) -->
     <section id="skills">
       <div class="card">
         <h2>Skills</h2>
-        <div class="skills-marquee" data-marquee data-speed="120">
+        <div class="skills-marquee" data-marquee data-speed="50">
           <div class="track">
             <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"> Python</span>
             <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"> C++</span>
@@ -303,42 +328,43 @@
       <div class="card">
         <h2>Experience</h2>
         <div class="timeline">
-        <div class="titem">
-          <h3>Admissions Ambassador — Florida Polytechnic University <span class="small">(Aug 2024 – Present)</span></h3>
-          <ul class="list-compact">
-            <li>Represented the university to prospective students and families during tours and info sessions.</li>
-            <li>Assisted 500+ prospective students with tailored resources; streamlined admissions with Eventbrite workflows.</li>
-          </ul>
+          <div class="titem">
+            <h3>Admissions Ambassador — Florida Polytechnic University <span class="small">(Aug 2024 – Present)</span></h3>
+            <ul class="list-compact">
+              <li>Represented the university to prospective students and families during tours and info sessions.</li>
+              <li>Assisted 500+ prospective students with tailored resources; streamlined admissions with Eventbrite workflows.</li>
+            </ul>
+          </div>
+        
+          <div class="titem">
+            <h3>Microscopy Department Intern — Zurich University, Zürich, Switzerland <span class="small">(Jul 2022 – Aug 2022)</span></h3>
+            <ul class="list-compact">
+              <li>Standardized guides for TEM, SEM, Cryo-EM, and image-analysis tools.</li>
+              <li>Updated documentation for microscopy software and workflows.</li>
+              <li>Organized the department’s training and documentation database.</li>
+            </ul>
+          </div>
+        
+          <div class="titem">
+            <h3>Research Intern — Fairchild Botanical Garden, Miami, FL <span class="small">(Jun 2022 – Jul 2022)</span></h3>
+            <ul class="list-compact">
+              <li>Worked on 4 experiments with plant-growth simulations for NASA’s Kennedy Space Center and Fairchild Botanical Garden.</li>
+              <li>Visited Kennedy Space Center; observed behind-the-scenes plant-biology research tied to Growing Beyond Earth.</li>
+              <li>Presented findings at a symposium hosted by Fairchild, live-streamed to NASA collaborators.</li>
+            </ul>
+          </div>
         </div>
-      
-        <div class="titem">
-          <h3>Microscopy Department Intern — Zurich University, Zürich, Switzerland <span class="small">(Jul 2022 – Aug 2022)</span></h3>
-          <ul class="list-compact">
-            <li>Standardized guides for TEM, SEM, Cryo-EM, and image-analysis tools.</li>
-            <li>Updated documentation for microscopy software and workflows.</li>
-            <li>Organized the department’s training and documentation database.</li>
-          </ul>
-        </div>
-      
-        <div class="titem">
-          <h3>Research Intern — Fairchild Botanical Garden, Miami, FL <span class="small">(Jun 2022 – Jul 2022)</span></h3>
-          <ul class="list-compact">
-            <li>Worked on 4 experiments with plant-growth simulations for NASA’s Kennedy Space Center and Fairchild Botanical Garden.</li>
-            <li>Visited Kennedy Space Center; observed behind-the-scenes plant-biology research tied to Growing Beyond Earth.</li>
-            <li>Presented findings at a symposium hosted by Fairchild, live-streamed to NASA collaborators.</li>
-          </ul>
-        </div>
-      </div>
 
       </div>
     </section>
 
-    <!-- RESUME -->
     <section id="resume">
       <div class="card">
         <h2>Résumé</h2>
-        <p class="sub">Upload <code>resume.pdf</code> to your repo root and this button will open it.</p>
-        <a class="btn primary" href="resume.pdf" target="_blank" rel="noopener"><i class="fa-regular fa-file-pdf"></i> Open résumé (PDF)</a>
+        <p class="sub">Click below to open my full résumé (PDF).</p>
+        <a class="btn primary" href="Diego_Penton_Computer_Science_2025_Resume.pdf" target="_blank" rel="noopener">
+          <i class="fa-regular fa-file-pdf"></i> Open Résumé (PDF)
+        </a>
       </div>
     </section>
 
@@ -383,10 +409,12 @@
     });
 
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Project carousel (selector tightened to direct children)
     (function(){
       const root = document.getElementById('projCarousel');
       if(!root) return;
-      const items = Array.from(root.querySelectorAll('.proj'));
+      const items = Array.from(root.querySelectorAll(':scope > article.proj')); // FIXED
       const prev = root.querySelector('#projPrev');
       const next = root.querySelector('#projNext');
       const counter = root.querySelector('#projCounter');
