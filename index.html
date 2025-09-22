@@ -11,14 +11,18 @@
 
   <style>
     /* ===== Design tokens: modern, clean, colorful ===== */
-    :root{
-      --bg:#2f6bd3; --text:#e7ecff; --muted:#a6b0c3; --card:#0f1420; --border:#1b2333;
-      --accent:#744bba; /* purple */
-      --accent-2:#00d9ff; /* cyan */
-      --accent-3:#f59e0b; /* amber */
-      --radius:14px;
-      --shadow:0 1px 2px rgba(0,0,0,.25), 0 12px 40px rgba(2,8,23,.45);
-    }
+  :root {
+  --bg: #FDFDFE;          /* background */
+  --card: #FFFFFF;        /* card panels */
+  --text: #1E293B;        /* main text (slate blue-gray) */
+  --muted: #64748B;       /* muted text (cool gray) */
+  --border: #E2E8F0;      /* subtle divider gray */
+
+  --accent: #6366F1;      /* indigo (main accent) */
+  --accent-2: #06B6D4;    /* aqua cyan (secondary accent) */
+  --accent-3: #F97316;    /* orange (highlight accent) */
+  }
+
     @media(prefers-color-scheme: light){
       :root{ --bg:#ffffff; --text:#0b1220; --muted:#5b6475; --card:#ffffff; --border:#e6e8ee; --shadow:0 1px 2px rgba(16,24,40,.06), 0 8px 28px rgba(16,24,40,.08);} }
     *{box-sizing:border-box}
@@ -228,57 +232,100 @@
               and experiment with deep learning models, making it a hands-on exploration of how modular design 
               principles can be applied to quantitative finance.
             </p>
+              <!-- Button + expanded tags -->
+            <a class="btn primary" href="https://github.com/diegopenton/Modular_Algorithmic_Trading_Framework" target="_blank" rel="noopener">View Project</a>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Backtesting</span>
+              <span class="tag">GARCH</span>
+              <span class="tag">LSTM</span>
+              <span class="tag">Bollinger Band</span>
+              <span class="tag">RSI</span>
+              <span class="tag">yfinance</span>
+              <span class="tag">Matplotlib</span>
           </article>
 
-          <article class="card proj">
-            <section id="database-project">
-              <h2>Database Systems Project – The Book Nook</h2>
-              <p>
-                For my <strong>Database Systems course project</strong>, I designed and implemented a relational database
-                for <em>The Book Nook</em>, a fictional bookstore specializing in science fiction and fantasy.
-                The store needed a system to manage its growing catalog of books and merchandise, track customer purchase histories,
-                and generate accurate invoices. I created an entity–relationship model with subtypes for products,
-                separating physical books, eBooks, and merchandise. From there, I built the schema, wrote SQL scripts
-                for table creation, and implemented stored procedures, queries, and views to automate invoicing,
-                update inventory in real time, and analyze sales data.
-              </p>
-              <p>
-                Working independently, I normalized the design to the third normal form (3NF) to ensure consistency and efficiency.
-                I tested the database using realistic dummy data and evaluated its performance with indexing to speed up queries.
-                The final solution provided a strong foundation for handling inventory, customer data, and transactions
-                across both in-store and online sales. This project not only strengthened my SQL and database modeling skills
-                but also gave me practical experience in solving real-world business challenges with structured data systems.
-              </p>
-            </section>
+          <article class="card proj" id="database-project">
+            <h3>Database Systems Project — The Book Nook <span class="small">(Spring 2025)</span></h3>
+            <p class="sub">
+              For my <strong>Database Systems course project</strong>, I designed and implemented a relational database
+              for <em>The Book Nook</em>, a fictional bookstore specializing in science fiction and fantasy.
+              The store needed a system to manage its growing catalog of books and merchandise, track customer purchase histories,
+              and generate accurate invoices. I created an entity–relationship model with subtypes for products,
+              separating physical books, eBooks, and merchandise. From there, I built the schema, wrote SQL scripts
+              for table creation, and implemented stored procedures, queries, and views to automate invoicing,
+              update inventory in real time, and analyze sales data.
+            </p>
+            <p class="sub">
+              Working independently, I normalized the design to the third normal form (3NF) to ensure consistency and efficiency.
+              I tested the database using realistic dummy data and evaluated its performance with indexing to speed up queries.
+              The final solution provided a strong foundation for handling inventory, customer data, and transactions across both
+              in-store and online sales. This project not only strengthened my SQL and database modeling skills but also gave me
+              practical experience in solving real-world business challenges with structured data systems.
+            </p>
+            <a class="btn primary" href="#" target="_blank" rel="noopener">View Project</a>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">Schema</span><span class="tag">Indexes</span><span class="tag">Final Project</span></div>
           </article>
 
-          <article class="card proj">
-            <h3>Database Final Project — Online Bookstore <span class="small">(Spring 2025)</span></h3>
-            <p class="sub">A comprehensive SQL database modeling the operations of an online bookstore. Included inventory tracking, customer management, invoicing, and sales analysis. Reports, stored procedures, and indexing were added to improve performance and provide actionable insights.</p>
-            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">SQL</span><span class="tag">Schema</span><span class="tag">Indexes</span></div>
-          </article>
+
         
+          <!-- Graph-Based Airport Connectivity Final Project -->
           <article class="card proj">
-            <h3>Graph-Based Airport Connectivity & Flight Route Optimization <span class="small">(Spring 2025)</span></h3>
-            <p class="sub">This project modeled airports and flight routes as graphs to analyze connectivity and improve routing efficiency. By applying shortest-path, MST, and state-search algorithms, the system identified redundancies, highlighted hub airports, and optimized network design.</p>
-            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">Graphs</span><span class="tag">Algorithms</span></div>
+            <h3>Graph-Based Airport Connectivity & Route Optimization <span class="small">(Spring 2025)</span></h3>
+            <p class="sub">
+              This class final project, completed with two other CS students, implemented a graph-theoretic system to analyze and optimize 
+              airport connectivity. Airports were modeled as nodes and flight routes as weighted edges, allowing us to calculate shortest 
+              paths, state-based searches, connection counts, and spanning trees. The system was coded in C++ with a custom Graph class 
+              featuring adjacency lists, state mappings, and connection tracking.
+            </p>
+            <p class="sub">
+              My role emphasized algorithm design and testing. We implemented shortest-path search, minimum spanning tree algorithms 
+              (Prim’s and Kruskal’s), and route optimization with stop constraints. This work highlighted the trade-offs in graph 
+              traversal efficiency and demonstrated how theoretical data-structures can be applied to real-world transportation networks. 
+              Deliverables included the full C++ source code, a report, and a final presentation.
+            </p>
+            <a class="btn primary" href="https://github.com/diegopenton/Graph-Based-Airport-Connectivity-and-Flight-Route-Optimization-System-Data-Structures-Final-Project-" target="_blank" rel="noopener">View Project</a>
+            <div class="tags"><span class="tag">C++</span><span class="tag">Graphs</span><span class="tag">Algorithms</span><span class="tag">Final Project</span></div>
           </article>
-        
+
+          <!-- Acoustic Modeling Final Project -->
           <article class="card proj">
-            <h3>Scientific Python Interactive Data Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
-            <p class="sub">Developed a Python GUI for analyzing and visualizing acoustic data. Features included waveform display, RT60 reverberation analysis, FFT tools, and noise-cleaning methods. Collaboration was structured with Agile methodology using GitHub and Asana.</p>
-            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Signal Proc</span></div>
+            <h3>Scientific Python Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
+            <p class="sub">
+              This final project, built with two other students, explored acoustic modeling using Python. We developed a Tkinter-based GUI 
+              that allowed users to import .wav or .mp3 files and automatically compute RT60 reverberation time across low, mid, and high 
+              frequency bands. The tool integrated signal-processing methods such as Fourier transforms, bandpass filtering, and spectrogram 
+              visualizations, with results displayed in both time and frequency domains.
+            </p>
+            <p class="sub">
+              Beyond its analytical capabilities, the project highlighted team collaboration and practical application of scientific Python 
+              libraries. I implemented the plotting and RT60 estimation pipeline, ensuring accuracy through Welch’s method and frequency 
+              analysis. By combining NumPy, SciPy, Matplotlib, and pydub into a single workflow, we delivered an interactive platform for 
+              exploring room acoustics that could be extended for further research.
+            </p>
+            <a class="btn primary" href="https://github.com/diegopenton/Scientific-Python-Interactive-Data-Acoustic-Modeling-Problem-Solving-in-Python-Final-Project-" target="_blank" rel="noopener">View Project</a>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">Matplotlib</span><span class="tag">Signal Processing</span><span class="tag">Final Project</span></div>
           </article>
-        
+
+          <!-- Hackathon: Hack-a-Sketch -->
           <article class="card proj">
-            <h3>Etch-a-Sketch Image Plotter (Hackathon) <span class="small">(Spring 2024)</span></h3>
-            <p class="sub">A C++/Arduino system that converted digital images into precise motor commands for an Etch-a-Sketch. The project integrated microcontroller programming with mechanical control, enabling automated sketching of digital graphics.</p>
-            <a class="btn" href="#" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">C++</span><span class="tag">Arduino</span></div>
+            <h3>Etch-a-Sketch — Hackathon Project <span class="small">(Spring 2024)</span></h3>
+            <p class="sub">
+              Etch-a-Sketch was developed during a 6-hour hackathon by a team of five students from different disciplines. 
+              The project aimed to reimagine the classic Etch-a-Sketch toy by connecting it to a C++/Arduino microcontroller system 
+              capable of translating digital images into precise motor commands. We implemented an image-processing pipeline that 
+              converted line data into a sequence of motor movements, producing accurate sketches on the device.
+            </p>
+            <p class="sub">
+              Working in a multidisciplinary team taught us how to combine hardware, software, and design expertise under tight 
+              deadlines. My focus was on programming the dual-motor logic to synchronize horizontal and vertical movements while 
+              minimizing error drift. This project demonstrated how rapid prototyping, collaboration, and creative engineering 
+              can produce a functional proof-of-concept within the constraints of a hackathon.
+            </p>
+            <a class="btn primary" href="https://devpost.com/software/hack-a-sketch" target="_blank" rel="noopener">View Project</a>
+            <div class="tags"><span class="tag">C++</span><span class="tag">Arduino</span><span class="tag">Hackathon</span></div>
           </article>
+
         
           <!-- CONTROLS -->
           <div class="proj-controls" aria-label="Project navigation">
