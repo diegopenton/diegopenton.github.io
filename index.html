@@ -372,14 +372,50 @@
       box-shadow:var(--shadow);
       transition:filter 0.2s ease;
     }
-.proj-btn:hover{
-  filter:brightness(1.05);
+      .proj-btn:hover{
+      filter:brightness(1.05);
+    }
+
+    html, body {
+      /* fallback while the image loads */
+      background-color: #d7e0cb;
+
+      /* wallpaper */
+      background-image: url('quant_coding_finance_bg_v2.jpg'); /* adjust if in assets/img */
+      background-repeat: repeat-y;        /* tall image, repeats vertically if needed */
+      background-position: center top;
+      background-size: cover;             /* scales to always cover viewport */
+      background-attachment: fixed;       /* gives subtle parallax on scroll */
+      margin: 0;
+      padding: 0;
+    }
+    /* Ensure body creates a stacking context */
+    body { position: relative; }
+
+    
+    .bg-blur{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;                 
+      background: rgba(215,224,203,0.55);   
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);   
+      z-index: 0;                          
+    } 
+    /* Lift your content above the overlay */
+    .nav, .wrap, .card, header, main, footer { 
+      position: relative; 
+      z-index: 1; 
 }
+
 
   </style>
 </head>
 
 <body>
+  <body>
+  <!-- Blur overlay -->
+  <div class="bg-blur" aria-hidden="true"></div>
   <!-- ===========================
        NAVBAR
   ============================ -->
