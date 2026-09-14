@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#e8eee5"/>
+  <path d="M50 58H910M50 480H910" stroke="#99aa96"/>
+  <text x="60" y="103" fill="#42533f" font-family="monospace" font-size="16" letter-spacing="2">DIEGO PENTON / PROJECT PRESENTATION</text>
+  <text x="60" y="252" fill="#2a3d29" font-family="Georgia,serif" font-size="70">The Book Nook</text>
+  <text x="64" y="311" fill="#42533f" font-family="Arial,sans-serif" font-size="23">A walkthrough of a SQL database project.</text>
+  <circle cx="89" cy="401" r="26" fill="#2a3d29"/><path d="M83 389L101 401L83 413Z" fill="#fff"/>
+  <text x="138" y="409" fill="#2a3d29" font-family="Arial,sans-serif" font-size="22">Play the original recording</text>
+  <text x="792" y="450" fill="#42533f" font-family="monospace" font-size="18">04:24</text>
+</svg>
