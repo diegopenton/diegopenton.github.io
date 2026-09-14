@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f6f1">
+  <meta name="theme-color" content="#fbfcfa">
   <meta name="description" content="Portfolio of Diego Penton, a Computer Science student focused on artificial intelligence, multi-agent systems, quantitative research, and applied software engineering.">
   <meta property="og:title" content="Diego Penton | AI & Software Portfolio">
   <meta property="og:description" content="AI systems, quantitative research, and applied software engineering.">
@@ -13,48 +13,29 @@
   <title>Diego Penton | AI & Software Portfolio</title>
 
   <script>
-    (function () {
-      document.documentElement.classList.add("js");
-      var saved = localStorage.getItem("theme");
-      if (saved) document.documentElement.dataset.theme = saved;
-    })();
+    document.documentElement.classList.add("js");
   </script>
 
   <style>
     :root {
       color-scheme: light;
-      --bg: #f4f6f1;
+      --bg: #fbfcfa;
       --surface: #ffffff;
-      --surface-soft: #edf1ea;
-      --surface-strong: #e4ebe0;
+      --surface-soft: #f3f7f2;
+      --surface-strong: #eaf1eb;
       --text: #172019;
-      --muted: #5d695f;
-      --line: #d8e0d6;
-      --accent: #315c45;
-      --accent-strong: #234735;
-      --accent-soft: #dce9df;
+      --muted: #526056;
+      --line: #dce5dd;
+      --accent: #376a4c;
+      --accent-strong: #28533a;
+      --accent-soft: #e7f2e9;
       --warm: #9b6b43;
-      --shadow: 0 18px 55px rgba(35, 71, 53, 0.09);
+      --shadow: 0 16px 44px rgba(40, 83, 58, 0.08);
       --radius-lg: 28px;
       --radius-md: 18px;
       --max: 1160px;
     }
 
-    html[data-theme="dark"] {
-      color-scheme: dark;
-      --bg: #101511;
-      --surface: #18201a;
-      --surface-soft: #1d2820;
-      --surface-strong: #253229;
-      --text: #eef4ef;
-      --muted: #aebbb0;
-      --line: #304036;
-      --accent: #91c6a5;
-      --accent-strong: #b8ddc5;
-      --accent-soft: #263b2d;
-      --warm: #d4a274;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
-    }
 
     * {
       box-sizing: border-box;
@@ -73,8 +54,8 @@
         var(--bg);
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
+      font-size: 17px;
+      line-height: 1.68;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -164,9 +145,6 @@
       box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 24%, transparent);
     }
 
-    html[data-theme="dark"] .brand-mark {
-      color: #102016;
-    }
 
     .nav-links {
       display: flex;
@@ -239,9 +217,6 @@
       box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 22%, transparent);
     }
 
-    html[data-theme="dark"] .button.primary {
-      color: #102016;
-    }
 
     .button.ghost {
       background: transparent;
@@ -370,32 +345,34 @@
       opacity: 0.86;
     }
 
-    .metrics {
+    .hero-context {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-top: 18px;
+      margin-top: 22px;
     }
 
-    .metric {
-      padding: 18px 20px;
+    .context-item {
+      padding: 20px;
       border: 1px solid var(--line);
       border-radius: 16px;
-      background: color-mix(in srgb, var(--surface) 82%, transparent);
+      background: var(--surface);
     }
 
-    .metric strong {
+    .context-item strong {
       display: block;
-      margin-bottom: 2px;
+      margin-bottom: 6px;
       color: var(--accent-strong);
-      font-size: 24px;
-      line-height: 1.2;
+      font-size: 16px;
+      line-height: 1.3;
     }
 
-    .metric span {
+    .context-item span {
+      display: block;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
+      line-height: 1.55;
     }
 
     .section {
@@ -747,18 +724,15 @@
       padding: clamp(30px, 6vw, 64px);
       border: 1px solid var(--line);
       border-radius: 34px;
-      background: var(--accent-strong);
-      color: #ffffff;
+      background: linear-gradient(135deg, var(--surface), var(--accent-soft));
+      color: var(--text);
       box-shadow: var(--shadow);
     }
 
-    html[data-theme="dark"] .contact-panel {
-      color: #102016;
-    }
 
     .contact-panel .kicker {
-      color: inherit;
-      opacity: 0.72;
+      color: var(--accent);
+      opacity: 1;
     }
 
     .contact-panel h2 {
@@ -769,7 +743,8 @@
     .contact-panel p {
       max-width: 670px;
       margin-bottom: 0;
-      opacity: 0.78;
+      color: var(--muted);
+      opacity: 1;
     }
 
     .contact-actions {
@@ -780,19 +755,16 @@
 
     .contact-actions .button {
       min-width: 170px;
-      border-color: rgba(255, 255, 255, 0.32);
-      background: #ffffff;
-      color: #173222;
+      border-color: var(--line);
+      background: var(--surface);
+      color: var(--text);
     }
 
     .contact-actions .button.ghost {
       background: transparent;
-      color: inherit;
+      color: var(--text);
     }
 
-    html[data-theme="dark"] .contact-actions .button.ghost {
-      border-color: rgba(16, 32, 22, 0.28);
-    }
 
     footer {
       padding-block: 28px 42px;
@@ -920,7 +892,7 @@
         font-size: clamp(42px, 13vw, 62px);
       }
 
-      .metrics,
+      .hero-context,
       .focus-grid,
       .projects-grid,
       .skills-grid {
@@ -1025,9 +997,6 @@
       </nav>
 
       <div class="nav-tools">
-        <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Switch color theme">
-          <span id="themeIcon" aria-hidden="true">◐</span>
-        </button>
         <a class="button header-resume" href="Diego_Penton_Computer_Science_2026_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
         <button class="menu-button" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">
           <span aria-hidden="true">☰</span>
@@ -1050,18 +1019,18 @@
           <a class="button ghost" href="mailto:pentond27@gmail.com">Email me</a>
         </div>
 
-        <div class="metrics" aria-label="Selected results">
-          <div class="metric">
-            <strong>15,000+</strong>
-            <span>research records indexed</span>
+        <div class="hero-context" aria-label="Areas of work">
+          <div class="context-item">
+            <strong>Applied artificial intelligence</strong>
+            <span>I build OCR and LLM workflows for real manufacturing, documentation, and research problems.</span>
           </div>
-          <div class="metric">
-            <strong>92%</strong>
-            <span>OCR character accuracy</span>
+          <div class="context-item">
+            <strong>Research engineering</strong>
+            <span>I design auditable systems that organize technical research and turn it into structured experiments.</span>
           </div>
-          <div class="metric">
-            <strong>1,500+</strong>
-            <span>prospective students supported</span>
+          <div class="context-item">
+            <strong>Clear technical communication</strong>
+            <span>I explain complex systems to students, collaborators, and stakeholders with different technical backgrounds.</span>
           </div>
         </div>
       </div>
@@ -1071,7 +1040,7 @@
           <img class="portrait" src="profile.jpg" alt="Portrait of Diego Penton" width="1200" height="1500" fetchpriority="high" decoding="async">
           <div class="portrait-label">
             <strong>Diego Penton</strong>
-            <span>Lakeland, Florida · Open to relocate</span>
+            <span>Open to relocation</span>
           </div>
         </div>
       </aside>
@@ -1337,28 +1306,8 @@
   </footer>
 
   <script>
-    var root = document.documentElement;
-    var themeButton = document.getElementById("themeToggle");
-    var themeMeta = document.querySelector('meta[name="theme-color"]');
     var menuButton = document.getElementById("menuToggle");
     var navLinks = document.getElementById("navLinks");
-
-    function currentTheme() {
-      return root.dataset.theme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    }
-
-    function applyTheme(theme) {
-      root.dataset.theme = theme;
-      localStorage.setItem("theme", theme);
-      themeMeta.setAttribute("content", theme === "dark" ? "#101511" : "#f4f6f1");
-      themeButton.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-    }
-
-    applyTheme(currentTheme());
-
-    themeButton.addEventListener("click", function () {
-      applyTheme(currentTheme() === "dark" ? "light" : "dark");
-    });
 
     menuButton.addEventListener("click", function () {
       var open = navLinks.classList.toggle("open");
