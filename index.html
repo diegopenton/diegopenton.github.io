@@ -14,6 +14,7 @@
 
   <script>
     (function () {
+      document.documentElement.classList.add("js");
       var saved = localStorage.getItem("theme");
       if (saved) document.documentElement.dataset.theme = saved;
     })();
@@ -821,12 +822,17 @@
     }
 
     .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .js .reveal {
       opacity: 0;
       transform: translateY(18px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .reveal.visible {
+    .js .reveal.visible {
       opacity: 1;
       transform: none;
     }
