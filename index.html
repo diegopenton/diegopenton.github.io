@@ -1,767 +1,1393 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Diego Penton — Portfolio</title>
-  <meta name="description" content="Diego Penton — Computer Science (AI). Projects, experience, skills, and contact." />
-  <meta name="color-scheme" content="light dark">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6f1">
+  <meta name="description" content="Portfolio of Diego Penton, a Computer Science student focused on artificial intelligence, multi-agent systems, quantitative research, and applied software engineering.">
+  <meta property="og:title" content="Diego Penton | AI & Software Portfolio">
+  <meta property="og:description" content="AI systems, quantitative research, and applied software engineering.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://diegopenton.github.io/">
+  <meta property="og:image" content="https://diegopenton.github.io/profile.jpg">
+  <title>Diego Penton | AI & Software Portfolio</title>
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>
+    (function () {
+      var saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.dataset.theme = saved;
+    })();
+  </script>
 
   <style>
-    /* =============================
-       Design tokens (Sage palette)
-    ============================= */
-    :root{
-      --bg:#d7e0cb;      /* page background */
-      --card:#ffffff;    /* cards/panels */
-      --text:#46523f;    /* main text */
-      --muted:#6b7366;   /* secondary text */
-      --border:#dadcd0;  /* subtle divider */
-    
-      --accent:#414e39;   /* deep sage */
-      --accent-2:#6b7366; /* desaturated sage */
-      --accent-3:#bdbfae; /* warm light sage */
-    
-      --radius:14px;
-      --shadow:0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.08);
+    :root {
+      color-scheme: light;
+      --bg: #f4f6f1;
+      --surface: #ffffff;
+      --surface-soft: #edf1ea;
+      --surface-strong: #e4ebe0;
+      --text: #172019;
+      --muted: #5d695f;
+      --line: #d8e0d6;
+      --accent: #315c45;
+      --accent-strong: #234735;
+      --accent-soft: #dce9df;
+      --warm: #9b6b43;
+      --shadow: 0 18px 55px rgba(35, 71, 53, 0.09);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --max: 1160px;
     }
 
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#ffffff; --text:#0b1220; --muted:#5b6475; --card:#ffffff; --border:#e6e8ee;
-        --shadow:0 1px 2px rgba(16,24,40,.06), 0 8px 28px rgba(16,24,40,.08);
-      }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #101511;
+      --surface: #18201a;
+      --surface-soft: #1d2820;
+      --surface-strong: #253229;
+      --text: #eef4ef;
+      --muted: #aebbb0;
+      --line: #304036;
+      --accent: #91c6a5;
+      --accent-strong: #b8ddc5;
+      --accent-soft: #263b2d;
+      --warm: #d4a274;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
     }
 
-    /* =============================
-       Base
-    ============================= */
-    *{ box-sizing:border-box; }
-
-    html, body{
-      margin:0;
-      padding:0;
-      background:
-        radial-gradient(1000px 600px at 85% -10%, rgba(189,191,174,.45), transparent 60%),
-        radial-gradient(900px 520px at -10% 10%, rgba(107,115,102,.25), transparent 55%),
-        var(--bg);
-      color:var(--text);
-      font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Arial, sans-serif;
+    * {
+      box-sizing: border-box;
     }
 
-    a{ color:var(--accent); }
-    a:hover{ text-decoration:underline; }
-
-    .wrap{ max-width:1100px; margin:0 auto; padding:28px; }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:22px;
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 94px;
     }
 
-    .btn{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding:12px 16px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
-      box-shadow:var(--shadow);
-      text-decoration:none;
-    }
-    .btn.primary{
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      color:#fff;
-      border-color:transparent;
-    }
-    .btn.primary:hover{ filter:brightness(1.05); }
-
-    h1{ font-size:36px; letter-spacing:.2px; margin:0; }
-    h2{ font-size:24px; margin:0 0 12px; }
-    h3{ font-size:18px; margin:12px 0 6px; }
-    .sub{ color:var(--muted); }
-
-    section{ margin:22px 0; }
-
-    /* =============================
-       Navbar (centered links)
-    ============================= */
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.6));
-      border-bottom:1px solid var(--border);
-      backdrop-filter:saturate(140%) blur(8px);
-    }
-    .nav-inner{
-      max-width:1100px;
-      margin:0 auto;
-      padding:10px 28px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:40px;
-    }
-    .links{
-      display:flex;
-      flex:1;
-      justify-content:space-between;
-    }
-    .links a{
-      flex:1;
-      text-align:center;
-      font-size:18px;
-      padding:14px 0;
-      border:none;
-      background:transparent;
-      border-radius:0;
-      color:var(--text);
-      text-decoration:none;
-    }
-
-    /* =============================
-       Hero (title + 2-column layout)
-    ============================= */
-    .hero{ margin-bottom:18px; }
-
-    .hero-title{
-      font-size:52px;
-      font-weight:700;
-      text-align:center;
-      margin:0 0 28px 0;
-      background:linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.4fr 1fr; /* text more space */
-      gap:32px;
-      align-items:start;             /* top-align text + photo */
-    }
-    .hero-text{
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    .about-text{
-      font-size:18px;
-      line-height:1.75;
-      color:var(--text);
-    }
-
-    /* Hero buttons — responsive 4-across */
-    .hero-buttons{
-      display:grid;
-      gap:12px;
-      margin-top:24px;
-    }
-    .hero-buttons .btn{
-      width:100%;
-      justify-content:center;
-      text-align:center;
-    }
-    @media (min-width:600px){
-      .hero-buttons{ grid-template-columns:repeat(2, 1fr); }
-    }
-    @media (min-width:900px){
-      .hero-buttons{ grid-template-columns:repeat(4, 1fr); }
-    }
-
-    /* Hero photo */
-    .hero-photo{ justify-self:center; }
-    .avatar-hero{
-      width:100%;
-      max-width:360px;
-      height:auto;
-      object-fit:cover;
-      border-radius:16px;
-      border:3px solid var(--border);
-      box-shadow:0 10px 26px rgba(0,0,0,.1);
-      background:#fff;
-      margin:0 auto;
-    }
-
-    /* Stack hero on mobile */
-    @media (max-width:900px){
-      .hero-grid{ grid-template-columns:1fr; text-align:center; }
-      .hero-buttons{ justify-content:center; } /* not strictly needed w/grid, kept harmless */
-    }
-
-    /* =============================
-       Projects (carousel + tags)
-    ============================= */
-    .proj-grid{ display:grid; gap:16px; }
-    @media (min-width:800px){
-      .proj-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
-    }
-
-    .proj{ overflow:hidden; }
-    .proj h3{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .proj-heading{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:26px;
-      font-weight:600;
-      margin-bottom:16px;
-      text-align:center;
-      background:linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .tags{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
-    .tag{
-      font-size:12px;
-      padding:4px 8px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      color:var(--accent);
-      background:rgba(189,191,174,.25);
-    }
-
-    /* Carousel */
-    .proj-carousel{ position:relative; }
-    .proj-carousel .proj{ display:none; }
-    .proj-carousel .proj.active{ display:block; }
-
-    .proj-controls{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-top:12px;
-    }
-    .proj-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:40px;
-      height:40px;
-      border-radius:10px;
-      cursor:pointer;
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
-      box-shadow:var(--shadow);
-    }
-    .proj-btn:hover{ border-color:var(--accent); }
-    .proj-counter{ color:var(--muted); font-size:14px; }
-
-    /* =============================
-       Skills (teleprompter marquee)
-    ============================= */
-    .skills-marquee{
-      overflow:hidden;
-      position:relative;
-      padding:8px 0;
-      mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-      -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-    }
-    .skills-marquee .track{
-      display:inline-flex;
-      gap:12px;
-      will-change:transform;
-      animation:marquee var(--dur, 20s) linear infinite;
-    }
-    .skills-marquee:hover .track{ animation-play-state:paused; }
-    .skills-marquee[data-dir="right"] .track{ animation-direction:reverse; }
-
-    .skill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 14px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      background:var(--card);
-      color:var(--text);
-      box-shadow:var(--shadow);
-      font-size:14px;
-      line-height:1.4;
-      white-space:nowrap;
-    }
-    .skill-icon{ width:18px; height:18px; object-fit:contain; flex-shrink:0; }
-
-    @keyframes marquee{
-      from{ transform:translateX(0); }
-      to  { transform:translateX(-50%); }
-    }
-    @media (prefers-reduced-motion:reduce){
-      .skills-marquee .track{ animation:none; }
-      .skills-marquee{
-        mask-image:none;
-        -webkit-mask-image:none;
-        overflow:visible;
-      }
-    }
-
-    /* =============================
-       Timeline (Experience)
-    ============================= */
-    .timeline{
-      position:relative;
-      padding-left:50px;                /* space between line and text */
-    }
-    .timeline::before{
-      content:"";
-      position:absolute;
-      left:20px;
-      top:0;
-      bottom:0;
-      width:3px;
-      border-radius:3px;
-      background:linear-gradient(var(--accent), var(--accent-2));
-    }
-    .titem{
-      position:relative;
-      margin:18px 0;
-    }
-    .titem::before{
-      content:"";
-      position:absolute;
-      left:-15px;
-      top:.5rem;
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:var(--accent);
-      box-shadow:0 0 0 3px rgba(116,75,186,.2);
-    }
-
-    /* =============================
-       Footer
-    ============================= */
-    footer{ text-align:center; color:var(--muted); padding:36px 0; }
-    .small{ font-size:14px; color:var(--muted); }
-    .proj-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:40px;
-      height:40px;
-      border-radius:12px;
-      cursor:pointer;
-      border:none;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-      color:#fff;
-      box-shadow:var(--shadow);
-      transition:filter 0.2s ease;
-    }
-      .proj-btn:hover{
-      filter:brightness(1.05);
-    }
-
-    html, body {
-      /* fallback while the image loads */
-      background-color: #d7e0cb;
-
-      /* wallpaper */
-      background-image: url('quant_coding_finance_bg_v2.jpg'); /* adjust if in assets/img */
-      background-repeat: repeat-y;        /* tall image, repeats vertically if needed */
-      background-position: center top;
-      background-size: cover;             /* scales to always cover viewport */
-      background-attachment: fixed;       /* gives subtle parallax on scroll */
+    body {
       margin: 0;
-      padding: 0;
+      background:
+        radial-gradient(circle at 8% 8%, color-mix(in srgb, var(--accent-soft) 72%, transparent), transparent 28rem),
+        radial-gradient(circle at 95% 24%, color-mix(in srgb, var(--surface-strong) 70%, transparent), transparent 24rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
-    /* Ensure body creates a stacking context */
-    body { position: relative; }
 
-    
-    .bg-blur{
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+      outline-offset: 4px;
+      border-radius: 8px;
+    }
+
+    .skip-link {
       position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--text);
+      color: var(--surface);
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 760;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--accent-strong);
+      color: var(--surface);
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 24%, transparent);
+    }
+
+    html[data-theme="dark"] .brand-mark {
+      color: #102016;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      background: var(--surface-soft);
+      color: var(--text);
+    }
+
+    .nav-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-button,
+    .menu-button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 720;
+      text-decoration: none;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
+    }
+
+    .button.primary {
+      border-color: var(--accent-strong);
+      background: var(--accent-strong);
+      color: #ffffff;
+      box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+
+    html[data-theme="dark"] .button.primary {
+      color: #102016;
+    }
+
+    .button.ghost {
+      background: transparent;
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      align-items: center;
+      gap: clamp(42px, 7vw, 90px);
+      padding-block: clamp(76px, 10vw, 128px);
+    }
+
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 78%, transparent);
+      color: var(--accent-strong);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0.02em;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4f9b6b;
+      box-shadow: 0 0 0 5px color-mix(in srgb, #4f9b6b 15%, transparent);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 830px;
+      margin-bottom: 24px;
+      font-size: clamp(44px, 7.2vw, 82px);
+      line-height: 0.99;
+      letter-spacing: -0.058em;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      max-width: 710px;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 21px);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-card {
+      position: relative;
+      width: min(100%, 400px);
+      justify-self: end;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: color-mix(in srgb, var(--surface) 87%, transparent);
+      box-shadow: var(--shadow);
+    }
+
+    .portrait-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      background: var(--surface-soft);
+    }
+
+    .portrait-wrap::after {
+      content: "";
+      position: absolute;
       inset: 0;
-      pointer-events: none;                 
-      background: rgba(215,224,203,0.55);   
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);   
-      z-index: 0;                          
-    } 
-    /* Lift your content above the overlay */
-    .nav, .wrap, .card, header, main, footer { 
-      position: relative; 
-      z-index: 1; 
-}
+      background: linear-gradient(180deg, transparent 62%, rgba(10, 17, 12, 0.42));
+      pointer-events: none;
+    }
 
+    .portrait {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 24%;
+    }
 
+    .portrait-label {
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      bottom: 30px;
+      z-index: 2;
+      color: #ffffff;
+    }
+
+    .portrait-label strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .portrait-label span {
+      font-size: 13px;
+      opacity: 0.86;
+    }
+
+    .metrics {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--surface) 82%, transparent);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--accent-strong);
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section {
+      padding-block: clamp(70px, 9vw, 112px);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.52fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .kicker {
+      margin-bottom: 9px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(32px, 4.7vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .section-intro {
+      max-width: 670px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .focus-card,
+    .project-card,
+    .skills-card,
+    .education-card {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--accent) 5%, transparent);
+    }
+
+    .focus-card {
+      min-height: 235px;
+      padding: 26px;
+      border-radius: var(--radius-md);
+    }
+
+    .card-number {
+      display: block;
+      margin-bottom: 48px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .focus-card h3 {
+      margin-bottom: 9px;
+      font-size: 21px;
+      letter-spacing: -0.025em;
+    }
+
+    .focus-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .education-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      margin-top: 16px;
+      padding: 26px;
+      border-radius: var(--radius-md);
+    }
+
+    .education-card h3 {
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .education-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .education-date {
+      color: var(--accent-strong);
+      font-size: 14px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .experience-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 0.38fr);
+      gap: 54px;
+      align-items: start;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .role {
+      position: relative;
+      padding: 0 0 42px 36px;
+    }
+
+    .role:last-child {
+      padding-bottom: 0;
+    }
+
+    .role::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 13px;
+      height: 13px;
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .role-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      margin-bottom: 9px;
+    }
+
+    .role h3 {
+      margin-bottom: 0;
+      font-size: 20px;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .role-date {
+      flex: 0 0 auto;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .role-company {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .role ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .role li + li {
+      margin-top: 7px;
+    }
+
+    .leadership-card {
+      position: sticky;
+      top: 104px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface-soft);
+    }
+
+    .leadership-card .kicker {
+      margin-bottom: 16px;
+    }
+
+    .leadership-card h3 {
+      margin-bottom: 4px;
+      font-size: 21px;
+    }
+
+    .leadership-card .role-company {
+      margin-bottom: 18px;
+    }
+
+    .leadership-card p {
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+
+    .impact {
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .impact strong {
+      display: block;
+      color: var(--accent-strong);
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .impact span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 46px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .project-type {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      max-width: 520px;
+      margin-bottom: 13px;
+      font-size: clamp(23px, 3vw, 30px);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .project-card > p {
+      margin-bottom: 22px;
+      color: var(--muted);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+    }
+
+    .tag {
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .project-link {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 20px;
+      color: var(--accent-strong);
+      font-size: 14px;
+      font-weight: 760;
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .skills-card {
+      padding: 26px;
+      border-radius: var(--radius-md);
+    }
+
+    .skills-card h3 {
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-list span {
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: clamp(30px, 6vw, 64px);
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: var(--accent-strong);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    html[data-theme="dark"] .contact-panel {
+      color: #102016;
+    }
+
+    .contact-panel .kicker {
+      color: inherit;
+      opacity: 0.72;
+    }
+
+    .contact-panel h2 {
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+
+    .contact-panel p {
+      max-width: 670px;
+      margin-bottom: 0;
+      opacity: 0.78;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .contact-actions .button {
+      min-width: 170px;
+      border-color: rgba(255, 255, 255, 0.32);
+      background: #ffffff;
+      color: #173222;
+    }
+
+    .contact-actions .button.ghost {
+      background: transparent;
+      color: inherit;
+    }
+
+    html[data-theme="dark"] .contact-actions .button.ghost {
+      border-color: rgba(16, 32, 22, 0.28);
+    }
+
+    footer {
+      padding-block: 28px 42px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 66px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .header-resume {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-block: 72px;
+      }
+
+      .hero-card {
+        width: min(100%, 470px);
+        justify-self: start;
+      }
+
+      .metrics {
+        grid-column: auto;
+      }
+
+      .section-heading,
+      .experience-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        gap: 18px;
+      }
+
+      .leadership-card {
+        position: static;
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 62px);
+      }
+
+      .metrics,
+      .focus-grid,
+      .projects-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .education-card,
+      .role-top {
+        grid-template-columns: 1fr;
+      }
+
+      .education-card {
+        display: grid;
+      }
+
+      .role-top {
+        display: grid;
+        gap: 4px;
+      }
+
+      .project-card {
+        min-height: 0;
+      }
+
+      .project-meta {
+        margin-bottom: 32px;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+      }
+
+      .contact-actions .button {
+        width: 100%;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Diego Penton",
+      "url": "https://diegopenton.github.io/",
+      "image": "https://diegopenton.github.io/profile.jpg",
+      "email": "mailto:pentond27@gmail.com",
+      "jobTitle": "Computer Science Student",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Florida Polytechnic University"
+      },
+      "sameAs": [
+        "https://github.com/diegopenton",
+        "https://www.linkedin.com/in/diegopenton"
+      ]
+    }
+  </script>
 </head>
 
 <body>
-  <body>
-  <!-- Blur overlay -->
-  <div class="bg-blur" aria-hidden="true"></div>
-  <!-- ===========================
-       NAVBAR
-  ============================ -->
-  <div class="nav">
-    <div class="nav-inner">
-      <nav class="links">
-        <a href="#home">Home</a>
-        <a href="#projects">Projects</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Diego Penton home">
+        <span class="brand-mark">DP</span>
+        <span class="brand-name">Diego Penton</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="#about">About</a>
         <a href="#experience">Experience</a>
-        <a href="#resume">Résumé</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
-    </div>
-  </div>
 
-  <div class="wrap">
-    <!-- ===========================
-    <!-- HERO / HOME -->
-    <section id="home" class="hero card">
-      <!-- Title -->
-      <h1 class="hero-title gradient-text">Diego Penton</h1>
-    
-      <!-- Two-column grid -->
-      <div class="hero-grid">
-        <!-- LEFT: About -->
-        <div class="hero-text">
-          <p class="about-par">
-            I’m Diego Penton, a Computer Science student at Florida Polytechnic University with a
-            focus on Artificial Intelligence. I’ve built strong skills in C, C++, SQL, and Python,
-            applying them to projects in data modeling, algorithms, and AI-driven systems.
-          </p>
-        
-          <p class="about-par">
-            Currently, I’m developing a Modular Algorithmic Trading Framework that explores strategies
-            through modular models like RSI, GARCH, and machine learning. The goal is to improve
-            backtesting reliability, reduce overfitting, and strengthen risk metrics such as the
-            Sharpe ratio and Value-at-Risk — blending my studies with my passion for finance.
-          </p>
-        
-          <p class="about-par">
-            Looking ahead, I’m pursuing a career in quantitative finance and algorithmic trading,
-            with the long-term goal of advancing research in machine learning and financial modeling.
-            From database systems to graph-based optimization, my projects fuel my drive to solve
-            complex problems at the intersection of AI and finance.
-          </p>
+      <div class="nav-tools">
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+          <span id="themeIcon" aria-hidden="true">◐</span>
+        </button>
+        <a class="button header-resume" href="Diego_Penton_Computer_Science_2026_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+        <button class="menu-button" id="menuToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation">
+          <span aria-hidden="true">☰</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="container hero" id="top">
+      <div class="hero-content reveal">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Computer Science · Artificial Intelligence</p>
+        <h1>Building practical <span>AI systems</span> for complex, real-world work.</h1>
+        <p class="hero-copy">
+          I’m Diego Penton, a Florida Polytechnic University senior working at the intersection of artificial intelligence, software engineering, and quantitative research.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">Explore my work ↓</a>
+          <a class="button" href="Diego_Penton_Computer_Science_2026_Resume.pdf" target="_blank" rel="noopener">Open résumé ↗</a>
+          <a class="button ghost" href="mailto:pentond27@gmail.com">Email me</a>
         </div>
-      
-        <!-- RIGHT: Profile -->
-        <div class="hero-photo">
-          <img src="profile.jpg" alt="Portrait of Diego Penton" class="avatar-hero" />
+
+        <div class="metrics" aria-label="Selected results">
+          <div class="metric">
+            <strong>15,000+</strong>
+            <span>research records indexed</span>
+          </div>
+          <div class="metric">
+            <strong>92%</strong>
+            <span>OCR character accuracy</span>
+          </div>
+          <div class="metric">
+            <strong>1,500+</strong>
+            <span>prospective students supported</span>
+          </div>
         </div>
       </div>
-    
-      <!-- Buttons row (full width under both columns) -->
-      <div class="hero-buttons">
-        <a class="btn primary" href="#projects"><i class="fa-solid fa-rocket"></i> View Projects</a>
-        <a class="btn" href="mailto:pentond27@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
-        <a class="btn" href="https://github.com/diegopenton" target="_blank" rel="noopener"><i class="devicon-github-original"></i> GitHub</a>
-        <a class="btn" href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+
+      <aside class="hero-card reveal" aria-label="Profile">
+        <div class="portrait-wrap">
+          <img class="portrait" src="profile.jpg" alt="Portrait of Diego Penton" width="1200" height="1500" fetchpriority="high" decoding="async">
+          <div class="portrait-label">
+            <strong>Diego Penton</strong>
+            <span>Lakeland, Florida · Open to relocate</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="kicker">About</p>
+            <h2>Curious by nature. Applied by design.</h2>
+          </div>
+          <p class="section-intro">
+            My work centers on turning difficult technical ideas into systems that can be tested, audited, and improved—from manufacturing OCR to multi-agent financial research.
+          </p>
+        </div>
+
+        <div class="focus-grid">
+          <article class="focus-card reveal">
+            <span class="card-number">01</span>
+            <h3>AI systems</h3>
+            <p>Local LLM inference, retrieval-augmented generation, multi-agent coordination, OCR, and dependable evaluation workflows.</p>
+          </article>
+          <article class="focus-card reveal">
+            <span class="card-number">02</span>
+            <h3>Quantitative research</h3>
+            <p>Research ingestion, strategy extraction, backtesting, walk-forward validation, volatility modeling, and risk-aware experimentation.</p>
+          </article>
+          <article class="focus-card reveal">
+            <span class="card-number">03</span>
+            <h3>Applied engineering</h3>
+            <p>Python and C++ systems, Dockerized services, APIs, data pipelines, graph algorithms, and reproducible technical documentation.</p>
+          </article>
+        </div>
+
+        <article class="education-card reveal">
+          <div>
+            <h3>Florida Polytechnic University</h3>
+            <p>B.S. in Computer Science · Concentration in Artificial Intelligence</p>
+          </div>
+          <div class="education-date">Graduating May 2027</div>
+        </article>
       </div>
     </section>
 
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="kicker">Experience</p>
+            <h2>Technical work with measurable outcomes.</h2>
+          </div>
+          <p class="section-intro">
+            Experience across applied AI, university outreach, scientific research environments, and student leadership.
+          </p>
+        </div>
 
+        <div class="experience-layout">
+          <div class="timeline">
+            <article class="role reveal">
+              <div class="role-top">
+                <h3>IT Intern</h3>
+                <span class="role-date">May 2026 – Aug 2026</span>
+              </div>
+              <p class="role-company">Vulkan USA</p>
+              <ul>
+                <li>Developed AI and automation solutions for U.S. manufacturing and documentation workflows, including OCR tools that converted scanned factory records into searchable text.</li>
+                <li>Built and evaluated a TrOCR workflow with preprocessing and review steps, reaching 92% character accuracy and 72.28% exact serial accuracy.</li>
+                <li>Worked with SAP HANA data workflows to understand enterprise storage, integration, indexing, and future AI-agent search needs.</li>
+              </ul>
+            </article>
 
-    <!-- ===========================
-         PROJECTS
-    ============================ -->
-    <section id="projects">
-      <div class="card">
-        <div class="proj-heading">Projects</div>
+            <article class="role reveal">
+              <div class="role-top">
+                <h3>Admissions Ambassador</h3>
+                <span class="role-date">Aug 2024 – Present</span>
+              </div>
+              <p class="role-company">Florida Polytechnic University</p>
+              <ul>
+                <li>Lead campus tours and information sessions covering academic programs, admissions, student life, and campus resources.</li>
+                <li>Supported more than 1,500 prospective students with individualized guidance and relevant university resources.</li>
+              </ul>
+            </article>
 
-        <div class="proj-carousel" id="projCarousel">
-          <!-- 1. Modular Trading -->
-          <article class="card proj">
-            <h3>Modular Algorithmic Trading Framework <span class="small">(Fall 2025 – Present)</span></h3>
-            <p class="sub">
-              This project is a modular algorithmic trading framework built in Python that I am actively developing.
-              The system is designed around a “tree-trunk and branches” architecture where each branch represents
-              a different predictive model, such as RSI-based decision trees, Bollinger band mean-reversion, GARCH
-              volatility forecasting, and LSTM/GRU sequence models. These branches generate signals and confidence
-              scores that are routed through a trunk ensemble and policy layer, which determines the final trading
-              action and position sizing. I structure the framework with unit testing, backtesting, and walk-forward
-              validation to make sure every component is evaluated out-of-sample, reducing the risk of overfitting.
-              The project is not just about writing models—it is about building a full research pipeline that can be
-              extended with new strategies and easily tested across different assets and time periods.
-            </p>
-            <p class="sub">
-              At the same time, I focus on the practical aspects of algorithmic trading research. The framework
-              includes a backtesting engine that calculates key metrics like Sharpe ratio, maximum drawdown, and
-              hit rate, giving me a way to judge strategies on both return and risk. Each branch is intentionally
-              lightweight and interpretable so that it can be debugged quickly, but when combined they create an
-              ensemble that adapts across market conditions. Beyond just producing trades, I also incorporate risk
-              management through volatility-aware position sizing and regime filters that control when strategies
-              should be active. The project continues to grow as I add new branches, refine ensemble weighting,
-              and experiment with deep learning models, making it a hands-on exploration of how modular design
-              principles can be applied to quantitative finance.
-            </p>
-            <a class="btn primary" href="https://github.com/diegopenton/Modular_Algorithmic_Trading_Framework" target="_blank" rel="noopener">View Project</a>
+            <article class="role reveal">
+              <div class="role-top">
+                <h3>Microscopy Intern</h3>
+                <span class="role-date">Jul 2022 – Aug 2022</span>
+              </div>
+              <p class="role-company">University of Zurich · Zurich, Switzerland</p>
+              <ul>
+                <li>Created training guides for TEM, SEM, Cryo-EM, and scientific image-analysis tools.</li>
+                <li>Used microscopy equipment and imaging software while improving technical documentation and the department’s training database.</li>
+              </ul>
+            </article>
+          </div>
+
+          <aside class="leadership-card reveal">
+            <p class="kicker">Leadership</p>
+            <h3>Vice President of Marketing</h3>
+            <p class="role-company">Society of Hispanic Professional Engineers</p>
+            <p>Lead chapter marketing for professional development, recruitment, convention initiatives, and sponsor outreach alongside a seven-member board.</p>
+            <div class="impact">
+              <strong>+150%</strong>
+              <span>monthly Instagram views since taking office</span>
+            </div>
+            <div class="impact">
+              <strong>+35.5%</strong>
+              <span>follower growth</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="kicker">Selected projects</p>
+            <h2>Systems built to learn, test, and scale.</h2>
+          </div>
+          <p class="section-intro">
+            Four projects from my current résumé, presented around the problem solved and the engineering behind it.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card reveal">
+            <div class="project-meta">
+              <span class="project-type">AI · Quant research</span>
+              <span>Jun 2026 – Present</span>
+            </div>
+            <h3>Project Argos</h3>
+            <p>A multi-agent AI research system that converts financial literature into structured, testable trading strategies. The platform combines local LLM inference, RAG, persistent memory, specialized agents, and an auditable corpus pipeline running on NVIDIA DGX Spark.</p>
             <div class="tags">
               <span class="tag">Python</span>
-              <span class="tag">Backtesting</span>
-              <span class="tag">GARCH</span>
-              <span class="tag">LSTM</span>
-              <span class="tag">Bollinger Band</span>
-              <span class="tag">RSI</span>
-              <span class="tag">yfinance</span>
-              <span class="tag">Matplotlib</span>
+              <span class="tag">LLMs</span>
+              <span class="tag">RAG</span>
+              <span class="tag">Docker</span>
+              <span class="tag">NVIDIA DGX Spark</span>
             </div>
           </article>
 
-          <!-- 2. DB Project -->
-          <article class="card proj" id="database-project">
-            <h3>Database Systems Project — The Book Nook <span class="small">(Spring 2025)</span></h3>
-            <p class="sub">
-              For my <strong>Database Systems course project</strong>, I designed and implemented a relational database
-              for <em>The Book Nook</em>, a fictional bookstore specializing in science fiction and fantasy.
-              The store needed a system to manage its growing catalog of books and merchandise, track customer purchase histories,
-              and generate accurate invoices. I created an entity–relationship model with subtypes for products,
-              separating physical books, eBooks, and merchandise. From there, I built the schema, wrote SQL scripts
-              for table creation, and implemented stored procedures, queries, and views to automate invoicing,
-              update inventory in real time, and analyze sales data.
-            </p>
-            <p class="sub">
-              Working independently, I normalized the design to the third normal form (3NF) to ensure consistency and efficiency.
-              I tested the database using realistic dummy data and evaluated its performance with indexing to speed up queries.
-              The final solution provided a strong foundation for handling inventory, customer data, and transactions across both
-              in-store and online sales. This project not only strengthened my SQL and database modeling skills but also gave me
-              practical experience in solving real-world business challenges with structured data systems.
-            </p>
-            <a class="btn primary" href="TheBookNook.mp4" target="_blank" rel="noopener">View Project</a>
+          <article class="project-card reveal">
+            <div class="project-meta">
+              <span class="project-type">Applied AI · OCR</span>
+              <span>May 2026 – Aug 2026</span>
+            </div>
+            <h3>OCR Documentation Digitization Pipeline</h3>
+            <p>A PyTorch and TrOCR pipeline that converts scanned manufacturing tables into structured, searchable records. It includes preprocessing, labeling, validation, and human-review workflows designed for dependable factory documentation.</p>
             <div class="tags">
-              <span class="tag">SQL</span><span class="tag">Schema</span><span class="tag">Indexes</span><span class="tag">Final Project</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">Hugging Face</span>
+              <span class="tag">TrOCR</span>
+              <span class="tag">Data validation</span>
             </div>
           </article>
 
-          <!-- 3. Graph Airports -->
-          <article class="card proj">
-            <h3>Graph-Based Airport Connectivity & Route Optimization <span class="small">(Spring 2025)</span></h3>
-            <p class="sub">
-              This class final project, completed with two other CS students, implemented a graph-theoretic system to analyze and optimize
-              airport connectivity. Airports were modeled as nodes and flight routes as weighted edges, allowing us to calculate shortest
-              paths, state-based searches, connection counts, and spanning trees. The system was coded in C++ with a custom Graph class
-              featuring adjacency lists, state mappings, and connection tracking.
-            </p>
-            <p class="sub">
-              My role emphasized algorithm design and testing. We implemented shortest-path search, minimum spanning tree algorithms
-              (Prim’s and Kruskal’s), and route optimization with stop constraints. This work highlighted the trade-offs in graph
-              traversal efficiency and demonstrated how theoretical data-structures can be applied to real-world transportation networks.
-              Deliverables included the full C++ source code, a report, and a final presentation.
-            </p>
-            <a class="btn primary" href="https://github.com/diegopenton/Graph-Based-Airport-Connectivity-and-Flight-Route-Optimization-System-Data-Structures-Final-Project-" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">C++</span><span class="tag">Graphs</span><span class="tag">Algorithms</span><span class="tag">Final Project</span></div>
+          <article class="project-card reveal">
+            <div class="project-meta">
+              <span class="project-type">Evaluation · Security</span>
+              <span>Mar 2026 – May 2026</span>
+            </div>
+            <h3>AI Coding Assistant Comparative Analysis</h3>
+            <p>A repeatable framework for comparing AI coding assistants on standardized Python tasks. Generated code is evaluated for correctness, readability, runtime performance, and security with Bandit and consistent scoring criteria.</p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">APIs</span>
+              <span class="tag">Bandit</span>
+              <span class="tag">Benchmarking</span>
+            </div>
           </article>
 
-          <!-- 4. Acoustic Modeling -->
-          <article class="card proj">
-            <h3>Scientific Python Acoustic Modeling <span class="small">(Fall 2024)</span></h3>
-            <p class="sub">
-              This final project, built with two other students, explored acoustic modeling using Python. We developed a Tkinter-based GUI
-              that allowed users to import .wav or .mp3 files and automatically compute RT60 reverberation time across low, mid, and high
-              frequency bands. The tool integrated signal-processing methods such as Fourier transforms, bandpass filtering, and spectrogram
-              visualizations, with results displayed in both time and frequency domains.
-            </p>
-            <p class="sub">
-              Beyond its analytical capabilities, the project highlighted team collaboration and practical application of scientific Python
-              libraries. I implemented the plotting and RT60 estimation pipeline, ensuring accuracy through Welch’s method and frequency
-              analysis. By combining NumPy, SciPy, Matplotlib, and pydub into a single workflow, we delivered an interactive platform for
-              exploring room acoustics that could be extended for further research.
-            </p>
-            <a class="btn primary" href="https://github.com/diegopenton/Scientific-Python-Interactive-Data-Acoustic-Modeling-Problem-Solving-in-Python-Final-Project-" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">Python</span><span class="tag">Tkinter</span><span class="tag">Matplotlib</span><span class="tag">Signal Processing</span><span class="tag">Final Project</span></div>
+          <article class="project-card reveal">
+            <div class="project-meta">
+              <span class="project-type">Algorithms · Graphs</span>
+              <span>Apr 2025 – May 2025</span>
+            </div>
+            <h3>Airport Connectivity & Route Optimization</h3>
+            <p>A C++ system that models airports and flight routes as weighted graphs. It applies shortest-path, minimum-spanning-tree, and state-search algorithms to identify alternate routes, major hubs, and connectivity patterns.</p>
+            <div class="tags">
+              <span class="tag">C++</span>
+              <span class="tag">Graph algorithms</span>
+              <span class="tag">Shortest path</span>
+              <span class="tag">MST</span>
+            </div>
+            <a class="project-link" href="https://github.com/diegopenton/Graph-Based-Airport-Connectivity-and-Flight-Route-Optimization-System-Data-Structures-Final-Project-" target="_blank" rel="noopener">View public repository ↗</a>
           </article>
-
-          <!-- 5. Hackathon -->
-          <article class="card proj">
-            <h3>Etch-a-Sketch — Hackathon Project <span class="small">(Spring 2024)</span></h3>
-            <p class="sub">
-              Etch-a-Sketch was developed during a 6-hour hackathon by a team of five students from different disciplines.
-              The project aimed to reimagine the classic Etch-a-Sketch toy by connecting it to a C++/Arduino microcontroller system
-              capable of translating digital images into precise motor commands. We implemented an image-processing pipeline that
-              converted line data into a sequence of motor movements, producing accurate sketches on the device.
-            </p>
-            <p class="sub">
-              Working in a multidisciplinary team taught us how to combine hardware, software, and design expertise under tight
-              deadlines. My focus was on programming the dual-motor logic to synchronize horizontal and vertical movements while
-              minimizing error drift. This project demonstrated how rapid prototyping, collaboration, and creative engineering
-              can produce a functional proof-of-concept within the constraints of a hackathon.
-            </p>
-            <a class="btn primary" href="https://devpost.com/software/hack-a-sketch" target="_blank" rel="noopener">View Project</a>
-            <div class="tags"><span class="tag">C++</span><span class="tag">Arduino</span><span class="tag">Hackathon</span></div>
-          </article>
-
-          <!-- Carousel controls -->
-          <div class="proj-controls" aria-label="Project navigation">
-            <button class="proj-btn" id="projPrev" aria-label="Previous project">
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="proj-counter" id="projCounter">1 / 5</div>
-            <button class="proj-btn" id="projNext" aria-label="Next project">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===========================
-         SKILLS
-    ============================ -->
-    <section id="skills">
-      <div class="card">
-        <h2>Skills</h2>
-        <div class="skills-marquee" data-marquee data-speed="50">
-          <div class="track">
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /> Python</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" /> C++</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" /> C</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL/MySQL" /> SQL / MySQL</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" /> Git & GitHub</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" /> VS Code</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" /> NumPy</span>
-            <span class="skill"><img class="skill-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib" /> Matplotlib</span>
-            <span class="skill"><i class="fa-solid fa-chart-line skill-icon"></i> yfinance</span>
-            <span class="skill"><i class="fa-solid fa-project-diagram skill-icon"></i> Graph Theory</span>
-            <span class="skill"><i class="fa-solid fa-database skill-icon"></i> Data Structures</span>
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="kicker">Skills</p>
+            <h2>A focused technical toolkit.</h2>
           </div>
+          <p class="section-intro">Organized by how I use each technology, making the section quicker to scan than a single moving list.</p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skills-card reveal">
+            <h3>Programming</h3>
+            <div class="skill-list">
+              <span>Python</span><span>C++</span><span>C</span><span>SQL</span>
+            </div>
+          </article>
+
+          <article class="skills-card reveal">
+            <h3>AI & Machine Learning</h3>
+            <div class="skill-list">
+              <span>PyTorch</span><span>Hugging Face</span><span>TrOCR</span><span>LLMs</span><span>RAG</span><span>Multi-Agent Systems</span><span>OCR</span>
+            </div>
+          </article>
+
+          <article class="skills-card reveal">
+            <h3>Data & Quantitative</h3>
+            <div class="skill-list">
+              <span>NumPy</span><span>Pandas</span><span>Matplotlib</span><span>yfinance</span><span>Backtesting</span><span>Walk-Forward Validation</span><span>GARCH</span>
+            </div>
+          </article>
+
+          <article class="skills-card reveal">
+            <h3>Tools & Platforms</h3>
+            <div class="skill-list">
+              <span>Git</span><span>GitHub</span><span>Docker</span><span>Linux</span><span>vLLM</span><span>REST APIs</span><span>SAP HANA</span><span>NVIDIA DGX Spark</span><span>LaTeX</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ===========================
-         EXPERIENCE
-    ============================ -->
-    <section id="experience">
-      <div class="card">
-        <h2>Experience</h2>
-        <div class="timeline">
-          <div class="titem">
-            <h3>Admissions Ambassador — Florida Polytechnic University <span class="small">(Aug 2024 – Present)</span></h3>
-            <ul class="list-compact">
-              <li>Represented the university to prospective students and families during tours and info sessions.</li>
-              <li>Assisted 500+ prospective students with tailored resources; streamlined admissions with Eventbrite workflows.</li>
-            </ul>
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div>
+            <p class="kicker">Contact</p>
+            <h2>Let’s build something thoughtful.</h2>
+            <p>I’m interested in AI/ML engineering, research, and quantitative technology opportunities where careful experimentation matters.</p>
           </div>
-          <div class="titem">
-            <h3>Microscopy Department Intern — Zurich University, Zürich, Switzerland <span class="small">(Jul 2022 – Aug 2022)</span></h3>
-            <ul class="list-compact">
-              <li>Standardized guides for TEM, SEM, Cryo-EM, and image-analysis tools.</li>
-              <li>Updated documentation for microscopy software and workflows.</li>
-              <li>Organized the department’s training and documentation database.</li>
-            </ul>
-          </div>
-          <div class="titem">
-            <h3>Research Intern — Fairchild Botanical Garden, Miami, FL <span class="small">(Jun 2022 – Jul 2022)</span></h3>
-            <ul class="list-compact">
-              <li>Worked on 4 experiments with plant-growth simulations for NASA’s Kennedy Space Center and Fairchild Botanical Garden.</li>
-              <li>Visited Kennedy Space Center; observed behind-the-scenes plant-biology research tied to Growing Beyond Earth.</li>
-              <li>Presented findings at a symposium hosted by Fairchild, live-streamed to NASA collaborators.</li>
-            </ul>
+          <div class="contact-actions">
+            <a class="button" href="mailto:pentond27@gmail.com">Send an email</a>
+            <a class="button ghost" href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="button ghost" href="https://github.com/diegopenton" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- ===========================
-         RESUME
-    ============================ -->
-    <section id="resume">
-      <div class="card">
-        <h2>Résumé</h2>
-        <p class="sub">Click below to open my full résumé (PDF).</p>
-        <a class="btn primary" href="Diego_Penton_Computer_Science_2026_Resume.pdf" target="_blank" rel="noopener">
-          <i class="fa-regular fa-file-pdf"></i> Open Résumé (PDF)
-        </a>
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Diego Penton</span>
+      <div class="footer-links">
+        <a href="mailto:pentond27@gmail.com">Email</a>
+        <a href="Diego_Penton_Computer_Science_2026_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <a href="#top">Back to top ↑</a>
       </div>
-    </section>
-
-    <!-- ===========================
-         CONTACT
-    ============================ -->
-    <section id="contact">
-      <div class="card">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:pentond27@gmail.com">pentond27@gmail.com</a></p>
-        <p>GitHub: <a href="https://github.com/diegopenton" target="_blank" rel="noopener">github.com/diegopenton</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/diegopenton" target="_blank" rel="noopener">linkedin.com/in/diegopenton</a></p>
-      </div>
-    </section>
-
-    <footer>
-      <div class="small">© <span id="y"></span> Diego Penton • Portfolio</div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('.links a').forEach(a => {
-      a.addEventListener('click', e => {
-        const href = a.getAttribute('href') || '';
-        if (href.startsWith('#')) {
-          e.preventDefault();
-          document.querySelector(href)?.scrollIntoView({ behavior:'smooth', block:'start' });
-        }
+    var root = document.documentElement;
+    var themeButton = document.getElementById("themeToggle");
+    var themeMeta = document.querySelector('meta[name="theme-color"]');
+    var menuButton = document.getElementById("menuToggle");
+    var navLinks = document.getElementById("navLinks");
+
+    function currentTheme() {
+      return root.dataset.theme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    }
+
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      localStorage.setItem("theme", theme);
+      themeMeta.setAttribute("content", theme === "dark" ? "#101511" : "#f4f6f1");
+      themeButton.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    }
+
+    applyTheme(currentTheme());
+
+    themeButton.addEventListener("click", function () {
+      applyTheme(currentTheme() === "dark" ? "light" : "dark");
+    });
+
+    menuButton.addEventListener("click", function () {
+      var open = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(open));
+      menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    });
+
+    navLinks.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open navigation");
       });
     });
 
-    // Skills marquee: duplicate content for seamless loop and set duration
-    document.querySelectorAll('[data-marquee]').forEach(mq => {
-      const track = mq.querySelector('.track');
-      const speed = Number(mq.dataset.speed || 120); // px/sec
-      if (!track) return;
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-      track.innerHTML = track.innerHTML + track.innerHTML; // duplicate once
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
 
-      requestAnimationFrame(() => {
-        const contentWidth = track.scrollWidth / 2; // original width
-        const dur = contentWidth / speed;           // seconds
-        track.style.setProperty('--dur', dur + 's');
+      document.querySelectorAll(".reveal").forEach(function (element) {
+        observer.observe(element);
       });
-    });
-
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Project carousel (direct children only)
-    (function(){
-      const root = document.getElementById('projCarousel');
-      if (!root) return;
-
-      const items   = Array.from(root.querySelectorAll(':scope > article.proj'));
-      const prevBtn = root.querySelector('#projPrev');
-      const nextBtn = root.querySelector('#projNext');
-      const counter = root.querySelector('#projCounter');
-
-      let i = 0;
-      const wrap = (n, len) => (n + len) % len;
-
-      function show(idx){
-        items.forEach((el, j) => el.classList.toggle('active', j === idx));
-        if (counter) counter.textContent = (idx + 1) + ' / ' + items.length;
-      }
-
-      show(i);
-      prevBtn?.addEventListener('click', () => { i = wrap(i - 1, items.length); show(i); });
-      nextBtn?.addEventListener('click', () => { i = wrap(i + 1, items.length); show(i); });
-    })();
+    } else {
+      document.querySelectorAll(".reveal").forEach(function (element) {
+        element.classList.add("visible");
+      });
+    }
   </script>
 </body>
 </html>
